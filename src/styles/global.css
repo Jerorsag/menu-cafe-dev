@@ -1,1 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&family=Dancing+Script:wght@500&display=swap');
 @import "tailwindcss";
+
+:root {
+  /* Colores Mocawa */
+  --sage: #A0AFAC;
+  --sage-dark: #647D7A;
+  --sage-darker: #2C413F;
+  --accent-light: #E6B5B5;
+  --accent-dark: #A16060;
+  --whatsapp: #25D366;
+}
+
+@layer base {
+  html {
+    font-size: 18px;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    color: var(--sage-darker);
+    font-weight: 600;
+  }
+  
+  h1 { font-size: 3.5rem; }
+  h2 { font-size: 2.5rem; }
+  h3 { font-size: 2rem; }
+  h4 { font-size: 1.5rem; }
+  h5 { font-size: 1.25rem; }
+  h6 { font-size: 1.125rem; }
+  
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    html { font-size: 16px; }
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.75rem; }
+    h4 { font-size: 1.5rem; }
+    p { font-size: 1rem; }
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-[var(--sage-dark)] text-white rounded-lg font-medium hover:bg-[var(--sage-darker)] transition-all duration-200;
+  }
+  
+  .btn-whatsapp {
+    @apply px-6 py-3 bg-[var(--whatsapp)] text-white rounded-lg font-medium hover:bg-green-600 transition-all duration-200;
+  }
+  
+  .container-mocawa {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Clases para usar con CSS variables */
+  .text-sage { color: var(--sage); }
+  .text-sage-dark { color: var(--sage-dark); }
+  .text-sage-darker { color: var(--sage-darker); }
+  .text-accent-dark { color: var(--accent-dark); }
+  .text-whatsapp { color: var(--whatsapp); }
+  
+  .bg-sage { background-color: var(--sage); }
+  .bg-sage-dark { background-color: var(--sage-dark); }
+  .bg-sage-darker { background-color: var(--sage-darker); }
+  .bg-accent-dark { background-color: var(--accent-dark); }
+}

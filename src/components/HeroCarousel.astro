@@ -1,0 +1,274 @@
+---
+import "../styles/global.css"
+import { ChevronLeft, ChevronRight } from '@lucide/astro';
+
+const images = [
+  { id: 1, image: '/img/products/instalaciones.png', alt: 'Ambiente acogedor' },
+  { id: 2, image: '/img/products/cafe2.png', alt: 'Especialidades de café' },
+  { id: 3, image: '/img/products/granizado.png', alt: 'Bebidas refrescantes' },
+  { id: 4, image: '/img/products/sandwich.png', alt: 'Opciones saludables' },
+  { id: 5, image: '/img/products/cafe.png', alt: 'Café artesanal Mocawa' },
+  { id: 6, image: '/img/products/torta.png', alt: 'Postres artesanales' }
+];
+---
+
+<section class="relative w-full bg-gradient-to-br from-[var(--sage)] to-[var(--sage-dark)] py-12">
+  <div class="container-mocawa">
+    <!-- Header del carrusel -->
+    <div class="text-center mb-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">
+        Descubre Mocawa Café
+      </h2>
+      <p class="text-white/90 text-lg">
+        Café 100% quindiano y productos frescos diarios
+      </p>
+    </div>
+    
+    <!-- Carrusel container -->
+    <div class="relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-sm">
+      <div id="carousel-track" class="flex transition-transform duration-500 ease-in-out">
+        {images.map((img) => (
+          <div class="carousel-item flex-shrink-0 p-3">
+            <div class="relative group overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300">
+              <div class="aspect-[4/3] overflow-hidden">
+                <img 
+                  src={img.image} 
+                  alt={img.alt}
+                  class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <!-- Controles -->
+      <button 
+        id="prev-btn"
+        class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full flex items-center justify-center text-sage-darker transition-colors duration-200 shadow-xl z-10 cursor-pointer"
+      >
+        <ChevronLeft size={24} />
+      </button>
+      
+      <button 
+        id="next-btn"
+        class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full flex items-center justify-center text-sage-darker transition-colors duration-200 shadow-xl z-10 cursor-pointer"
+      >
+        <ChevronRight size={24} />
+      </button>
+    </div>
+    
+    <!-- Indicadores -->
+    <div class="flex justify-center mt-6">
+      <div id="indicators-container" class="flex gap-3">
+        <!-- Generados por JS -->
+      </div>
+    </div>
+    
+    <!-- CTA -->
+    <div class="text-center mt-8">
+      <a href="/menu" class="btn-primary">
+        Ver Menú Completo →
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+function initMocawaCarousel() {
+  const track = document.getElementById('carousel-track');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const indicatorsContainer = document.getElementById('indicators-container');
+  
+  if (!track) return;
+  
+  let currentIndex = 0;
+  let autoplayInterval;
+  let isSliding = false;
+  
+  // Obtener items visibles según pantalla
+  function getItemsToShow() {
+    if (window.innerWidth < 640) return 1;
+    if (window.innerWidth < 1024) return 2;
+    return 3;
+  }
+  
+  // Calcular índice máximo
+  function getMaxIndex() {
+    const totalItems = track.children.length;
+    return Math.max(0, totalItems - getItemsToShow());
+  }
+  
+  // Configurar anchos responsive
+  function setupItemWidths() {
+    const itemsToShow = getItemsToShow();
+    Array.from(track.children).forEach(item => {
+      item.style.width = `calc(${100 / itemsToShow}% - 1rem)`;
+    });
+  }
+  
+  // Crear indicadores
+  function createIndicators() {
+    if (!indicatorsContainer) return;
+    
+    const maxIndex = getMaxIndex();
+    indicatorsContainer.innerHTML = '';
+    
+    if (maxIndex === 0) {
+      indicatorsContainer.parentElement.style.display = 'none';
+      return;
+    }
+    
+    indicatorsContainer.parentElement.style.display = 'flex';
+    
+    for (let i = 0; i <= maxIndex; i++) {
+      const indicator = document.createElement('button');
+      indicator.className = 'w-3 h-3 rounded-full transition-all duration-300 bg-white/40 hover:bg-white/70';
+      indicator.addEventListener('click', () => goToSlide(i));
+      indicatorsContainer.appendChild(indicator);
+    }
+  }
+  
+  // Mostrar slide específico
+  function showSlide(index) {
+    if (isSliding) return;
+    isSliding = true;
+    
+    currentIndex = index;
+    const itemWidth = 100 / getItemsToShow();
+    const translateX = -(index * itemWidth);
+    
+    track.style.transform = `translateX(${translateX}%)`;
+    updateIndicators();
+    
+    setTimeout(() => {
+      isSliding = false;
+    }, 500);
+  }
+  
+  // Actualizar indicadores
+  function updateIndicators() {
+    if (!indicatorsContainer) return;
+    
+    const indicators = indicatorsContainer.querySelectorAll('button');
+    indicators.forEach((indicator, i) => {
+      indicator.className = i === currentIndex 
+        ? 'w-8 h-3 rounded-full transition-all duration-300 bg-white shadow-lg'
+        : 'w-3 h-3 rounded-full transition-all duration-300 bg-white/40 hover:bg-white/70';
+    });
+  }
+  
+  // Siguiente slide
+  function nextSlide() {
+    const maxIndex = getMaxIndex();
+    const nextIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
+    showSlide(nextIndex);
+  }
+  
+  // Slide anterior
+  function prevSlide() {
+    const maxIndex = getMaxIndex();
+    const prevIndex = currentIndex <= 0 ? maxIndex : currentIndex - 1;
+    showSlide(prevIndex);
+  }
+  
+  // Ir a slide específico
+  function goToSlide(index) {
+    const maxIndex = getMaxIndex();
+    if (index !== currentIndex && index >= 0 && index <= maxIndex) {
+      showSlide(index);
+      restartAutoplay();
+    }
+  }
+  
+  // Autoplay
+  function startAutoplay() {
+    autoplayInterval = setInterval(nextSlide, 4000);
+  }
+  
+  function stopAutoplay() {
+    clearInterval(autoplayInterval);
+  }
+  
+  function restartAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+  
+  // Event listeners
+  prevBtn?.addEventListener('click', () => {
+    prevSlide();
+    restartAutoplay();
+  });
+  
+  nextBtn?.addEventListener('click', () => {
+    nextSlide();
+    restartAutoplay();
+  });
+  
+  // Touch support
+  let startX = 0;
+  track?.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    stopAutoplay();
+  });
+  
+  track?.addEventListener('touchend', (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const diff = startX - endX;
+    
+    if (Math.abs(diff) > 50) {
+      diff > 0 ? nextSlide() : prevSlide();
+    }
+    startAutoplay();
+  });
+  
+  // Pause/resume en hover
+  track?.addEventListener('mouseenter', stopAutoplay);
+  track?.addEventListener('mouseleave', startAutoplay);
+  
+  // Responsive
+  window.addEventListener('resize', () => {
+    setupItemWidths();
+    createIndicators();
+    showSlide(Math.min(currentIndex, getMaxIndex()));
+  });
+  
+  // Inicializar
+  setupItemWidths();
+  createIndicators();
+  showSlide(0);
+  startAutoplay();
+}
+
+// Inicializar cuando DOM esté listo
+document.addEventListener('DOMContentLoaded', initMocawaCarousel);
+</script>
+
+<style>
+  .carousel-item {
+    min-width: 0;
+    flex-shrink: 0;
+  }
+  
+  #carousel-track {
+    display: flex;
+    will-change: transform;
+  }
+  
+  @media (max-width: 639px) {
+    .carousel-item { width: calc(100% - 1rem) !important; }
+    #prev-btn, #next-btn { width: 40px; height: 40px; }
+  }
+  
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .carousel-item { width: calc(50% - 1rem) !important; }
+  }
+  
+  @media (min-width: 1024px) {
+    .carousel-item { width: calc(33.333% - 1rem) !important; }
+  }
+</style>

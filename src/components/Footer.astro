@@ -1,0 +1,66 @@
+---
+import "../styles/global.css"
+import { MapPin, Clock, Phone, Instagram, Facebook } from '@lucide/astro';
+---
+
+<footer class="bg-sage-darker text-white">
+  <div class="container-mocawa py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Info del negocio -->
+      <div>
+        <img src="/img/logo-mocawa.png" alt="Mocawa Café" class="h-12 w-auto mb-4" />
+        <p class="text-gray-300 mb-4">Café 100% quindiano y pan fresco diario. Tu pausa perfecta en el corazón de Armenia.</p>
+        
+        <!-- Redes sociales -->
+        <div class="flex space-x-4">
+          <a href="https://instagram.com/mocawacafe" target="_blank" class="text-gray-300 hover:text-white transition-colors">
+            <Instagram size={20} />
+          </a>
+          <a href="https://facebook.com/mocawacafe" target="_blank" class="text-gray-300 hover:text-white transition-colors">
+            <Facebook size={20} />
+          </a>
+        </div>
+      </div>
+      
+      <!-- Enlaces rápidos -->
+      <div>
+        <h3 class="font-semibold mb-4">Enlaces Rápidos</h3>
+        <div class="space-y-2">
+          <a href="/menu" class="block text-gray-300 hover:text-white transition-colors">Nuestro Menú</a>
+          <a href="/nosotros" class="block text-gray-300 hover:text-white transition-colors">Sobre Nosotros</a>
+          <a href="/blog" class="block text-gray-300 hover:text-white transition-colors">Blog</a>
+          <a href="https://wa.me/573001234567" class="block text-whatsapp hover:text-green-400 transition-colors">Pedir por WhatsApp</a>
+        </div>
+      </div>
+      
+      <!-- Contacto e info -->
+      <div>
+        <h3 class="font-semibold mb-4">Visitanos</h3>
+        <div class="space-y-3 text-gray-300">
+          <div class="flex items-start space-x-2">
+            <MapPin size={16} class="mt-1 flex-shrink-0" />
+            <span class="text-sm">CC Mocawa Plaza<br />Primer Piso, Armenia, Quindío</span>
+          </div>
+          
+          <div class="flex items-center space-x-2">
+            <Clock size={16} class="flex-shrink-0" />
+            <span class="text-sm">Lun - Sáb: 7:00 AM - 9:00 PM</span>
+          </div>
+          
+          <div class="flex items-center space-x-2">
+            <Phone size={16} class="flex-shrink-0" />
+            <span class="text-sm">+57 300 123 4567</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Copyright -->
+    <div class="border-t border-sage-dark mt-8 pt-8 text-center">
+      <p class="text-gray-400 text-sm">
+        © 2025 Mocawa Café. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>
