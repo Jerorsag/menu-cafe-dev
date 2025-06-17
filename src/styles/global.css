@@ -75,3 +75,10 @@
   .bg-sage-darker { background-color: var(--sage-darker); }
   .bg-accent-dark { background-color: var(--accent-dark); }
 }
+
+/* Override de estilos de Instagram embed */
+.instagram-media {
+  min-width: auto !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}

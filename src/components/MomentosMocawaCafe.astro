@@ -1,0 +1,73 @@
+---
+import "../styles/global.css"
+import { Instagram } from '@lucide/astro';
+---
+
+<section class="relative w-full bg-gradient-to-br from-gray-50 to-white py-16 lg:py-20">
+  <div class="container-mocawa">
+    <!-- Header de la sección -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 mb-4">
+        <Instagram class="text-pink-500 w-6 h-6" />
+        <span class="text-[var(--sage)] font-medium text-sm uppercase tracking-wide">Síguenos</span>
+      </div>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--sage-darker)] mb-4">
+        Momentos Mocawa Cafe
+      </h2>
+      <p class="text-gray-600 text-lg max-w-2xl mx-auto mb-8">
+        Únete a nuestra comunidad en Instagram y descubre los momentos únicos 
+        que vivimos cada día en nuestro café.
+      </p>
+    </div>
+
+    <!-- Grid de posts reales de Instagram -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 mb-12">
+      
+      <!-- Post 1 -->
+      <div class="group">
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 overflow-hidden border border-gray-100 transform hover:-translate-y-1 ease-in h-220">
+          <blockquote 
+            class="instagram-media" 
+            data-instgrm-captioned 
+            data-instgrm-permalink="https://www.instagram.com/reel/DGMPC0RyINY/?utm_source=ig_embed&utm_campaign=loading" 
+            data-instgrm-version="14"
+          >
+          </blockquote>
+        </div>
+      </div>
+
+      <!-- Post 2 -->
+      <div class="group">
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all overflow-hidden border border-gray-100 transform hover:-translate-y-1 ease-in h-220">
+          <blockquote 
+            class="instagram-media" 
+            data-instgrm-captioned 
+            data-instgrm-permalink="https://www.instagram.com/reel/DFv6Shjyp5u/?utm_source=ig_embed&utm_campaign=loading" 
+            data-instgrm-version="14"
+          >
+          </blockquote>
+        </div>
+      </div>
+
+      <!-- Post 3 -->
+      <div class="group lg:col-span-2 xl:col-span-1 z-1">
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all overflow-hidden border border-gray-100 transform hover:-translate-y-1 ease-in h-220">
+          <blockquote 
+            class="instagram-media" 
+            data-instgrm-captioned 
+            data-instgrm-permalink="https://www.instagram.com/reel/DFWKYIHvUpN/?utm_source=ig_embed&utm_campaign=loading" 
+            data-instgrm-version="14"
+          >
+          </blockquote>
+        </div>
+      </div>
+
+    </div>
+
+  <!-- Decoración de fondo -->
+  <div class="absolute top-0 left-0 w-72 h-72 bg-gradient-to-br from-pink-500/5 to-orange-500/5 rounded-full -translate-y-36 -translate-x-36 pointer-events-none z-0"></div>
+  <div class="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-[var(--sage)]/5 to-transparent rounded-full translate-y-48 pointer-events-none z-0"></div>
+</section>
+
+<!-- Script de Instagram -->
+<script async src="//www.instagram.com/embed.js"></script>

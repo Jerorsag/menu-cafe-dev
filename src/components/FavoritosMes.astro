@@ -1,0 +1,118 @@
+---
+import "../styles/global.css"
+import { Star, Heart } from '@lucide/astro';
+
+const favoritosDelMes = [
+  {
+    id: 1,
+    nombre: "Torta Artesanal",
+    descripcion: "El combo perfecto",
+    precio: "$8.500",
+    imagen: "/img/products/torta.png",
+    alt: "Café americano con croissant fresco",
+    popular: true
+  },
+  {
+    id: 2,
+    nombre: "Latte",
+    descripcion: "Cada taza es única",
+    precio: "$7.200",
+    imagen: "/img/products/cafe.png",
+    alt: "Latte con arte en espuma de leche",
+    popular: false
+  },
+  {
+    id: 3,
+    nombre: "Sándwich Saludable",
+    descripcion: "Para después del gym",
+    precio: "$9.800",
+    imagen: "/img/products/sandwich.png",
+    alt: "Sándwich saludable con vegetales frescos",
+    popular: false
+  },
+  {
+    id: 4,
+    nombre: "Granizado de Cafe",
+    descripcion: "Nuestro secreto mejor guardado",
+    precio: "$6.800",
+    imagen: "/img/products/granizado.png",
+    alt: "Cappuccino especial de la casa",
+    popular: true
+  }
+];
+---
+
+<section class="relative w-full bg-white py-16 lg:py-20">
+  <div class="container-mocawa">
+    <!-- Header de la sección -->
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 mb-4">
+        <Heart class="text-[var(--sage)] w-6 h-6" />
+        <span class="text-[var(--sage)] font-medium text-sm uppercase tracking-wide">Lo más pedido</span>
+      </div>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--sage-darker)] mb-4">
+        Favoritos del Mes
+      </h2>
+      <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+        Descubre los productos que más aman nuestros clientes. 
+        Cada uno preparado con la calidad y frescura que nos caracteriza.
+      </p>
+    </div>
+
+    <!-- Grid de productos favoritos -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      {favoritosDelMes.map((producto, index) => (
+        <div class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 z-1">
+          {/* Badge de popular */}
+          {producto.popular && (
+            <div class="absolute top-4 left-4 z-10">
+              <div class="bg-gradient-to-r from-[var(--sage)] to-[var(--sage-dark)] text-white px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1 shadow-lg">
+                <Star class="w-3 h-3 fill-current" />
+                Popular
+              </div>
+            </div>
+          )}
+
+          {/* Imagen del producto */}
+          <div class="relative overflow-hidden aspect-[4/3] bg-gradient-to-br from-gray-50 to-gray-100">
+            <img 
+              src={producto.imagen} 
+              alt={producto.alt}
+              class="w-full h-full object-cover object-center group-hover:scale-103 transition-transform duration-700 ease-in-out"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+
+          {/* Contenido de la tarjeta */}
+          <div class="p-6">
+            <div class="mb-3">
+              <h3 class="text-lg font-bold text-[var(--sage-darker)] mb-2 group-hover:text-[var(--sage)] transition-colors duration-300">
+                {producto.nombre}
+              </h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                {producto.descripcion}
+              </p>
+            </div>
+
+            {/* Precio y CTA */}
+            <div class="flex items-center justify-between">
+              <div class="text-2xl font-bold text-[var(--sage-darker)]">
+                {producto.precio}
+              </div>
+              <button class="bg-[var(--sage)] hover:bg-[var(--sage-dark)] text-white px-4 py-2 rounded-xl font-medium transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 ease-in cursor-pointer">
+                Ordenar
+              </button>
+            </div>
+          </div>
+
+          {/* Efecto hover en el borde */}
+          <div class="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-[var(--sage)]/30 transition-colors duration-300 pointer-events-none"></div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Decoración de fondo (lado contrario) -->
+  <div class="absolute -top-10 right-10 w-72 h-72 bg-gradient-to-bl from-white-500/5 to-gray-700/5 rounded-full -translate-y-36 -translate-x-36 pointer-events-none z-0"></div>
+  <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-[var(--sage)]/5 to-transparent rounded-full translate-y-48 pointer-events-none z-0"></div>
+</section>
