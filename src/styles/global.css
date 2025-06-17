@@ -2,77 +2,153 @@
 @import "tailwindcss";
 
 :root {
-  /* Colores Mocawa */
+  /* Colores Mocawa originales */
   --sage: #A0AFAC;
   --sage-dark: #647D7A;
   --sage-darker: #2C413F;
   --accent-light: #E6B5B5;
   --accent-dark: #A16060;
   --whatsapp: #25D366;
+  
+  /* Variables para el sistema de inversión de colores */
+  --layout-bg: #ffffff;
+  --layout-text: #1f2937;
+  --header-bg: #ffffff;
+  --header-text: var(--sage-darker);
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+  --button-primary-bg: var(--sage-dark);
+  --button-primary-text: #ffffff;
+  --accent-color: var(--sage);
+  --section-bg: #ffffff;
 }
 
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 2rem; 
-    font-size: 18px;
-  }
-  
-  body {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
-    color: var(--sage-darker);
-    font-weight: 600;
-  }
-  
-  h1 { font-size: 3.5rem; }
-  h2 { font-size: 2.5rem; }
-  h3 { font-size: 2rem; }
-  h4 { font-size: 1.5rem; }
-  h5 { font-size: 1.25rem; }
-  h6 { font-size: 1.125rem; }
-  
-  p {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-  }
-  
-  @media (max-width: 768px) {
-    html { font-size: 16px; }
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
-    h3 { font-size: 1.75rem; }
-    h4 { font-size: 1.5rem; }
-    p { font-size: 1rem; }
-  }
+/* Tema invertido para la página de menú */
+.menu-theme {
+  --layout-bg: var(--sage-darker);
+  --layout-text: #ffffff;
+  --header-bg: var(--sage-darker);
+  --header-text: #ffffff;
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --card-border: rgba(255, 255, 255, 0.2);
+  --button-primary-bg: #ffffff;
+  --button-primary-text: var(--sage-darker);
+  --accent-color: var(--sage);
+  --section-bg: var(--sage-dark);
+}
 
-  .btn-primary {
-    @apply px-6 py-3 bg-[var(--sage-dark)] text-white rounded-lg font-medium hover:bg-[var(--sage-darker)] transition-all duration-200;
-  }
-  
-  .btn-whatsapp {
-    @apply px-6 py-3 bg-[var(--whatsapp)] text-white rounded-lg font-medium hover:bg-green-600 transition-all duration-200;
-  }
-  
-  .container-mocawa {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-  
-  /* Clases para usar con CSS variables */
-  .text-sage { color: var(--sage); }
-  .text-sage-dark { color: var(--sage-dark); }
-  .text-sage-darker { color: var(--sage-darker); }
-  .text-accent-dark { color: var(--accent-dark); }
-  .text-whatsapp { color: var(--whatsapp); }
-  
-  .bg-sage { background-color: var(--sage); }
-  .bg-sage-dark { background-color: var(--sage-dark); }
-  .bg-sage-darker { background-color: var(--sage-darker); }
-  .bg-accent-dark { background-color: var(--accent-dark); }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem; 
+  font-size: 18px;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: var(--layout-bg);
+  color: var(--layout-text);
+  transition: background-color 0.6s ease-in-out, color 0.6s ease-in-out;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  transition: color 0.6s ease-in-out;
+}
+
+h1 { font-size: 3.5rem; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 2rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1.125rem; }
+
+p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  html { font-size: 16px; }
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.75rem; }
+  h4 { font-size: 1.5rem; }
+  p { font-size: 1rem; }
+}
+
+.btn-primary {
+  @apply px-6 py-3 rounded-lg font-medium transition-all duration-200;
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
+}
+
+.btn-primary:hover {
+  filter: brightness(0.9);
+}
+
+.btn-whatsapp {
+  @apply px-6 py-3 bg-[var(--whatsapp)] text-white rounded-lg font-medium hover:bg-green-600 transition-all duration-200;
+}
+
+.container-mocawa {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Clases para usar con CSS variables originales */
+.text-sage { color: var(--sage); }
+.text-sage-dark { color: var(--sage-dark); }
+.text-sage-darker { color: var(--sage-darker); }
+.text-accent-dark { color: var(--accent-dark); }
+.text-whatsapp { color: var(--whatsapp); }
+
+.bg-sage { background-color: var(--sage); }
+.bg-sage-dark { background-color: var(--sage-dark); }
+.bg-sage-darker { background-color: var(--sage-darker); }
+.bg-accent-dark { background-color: var(--accent-dark); }
+
+/* Nuevas clases utilitarias para el sistema de inversión */
+.bg-layout { 
+  background-color: var(--layout-bg);
+  transition: background-color 0.6s ease-in-out;
+}
+
+.text-layout { 
+  color: var(--layout-text);
+  transition: color 0.6s ease-in-out;
+}
+
+.bg-header { 
+  background-color: var(--header-bg);
+  transition: background-color 0.6s ease-in-out;
+}
+
+.text-header { 
+  color: var(--header-text);
+  transition: color 0.6s ease-in-out;
+}
+
+.bg-card { 
+  background-color: var(--card-bg);
+  transition: background-color 0.6s ease-in-out;
+}
+
+.border-card { 
+  border-color: var(--card-border);
+  transition: border-color 0.6s ease-in-out;
+}
+
+.bg-section {
+  background-color: var(--section-bg);
+  transition: background-color 0.6s ease-in-out;
+}
+
+.text-accent { 
+  color: var(--accent-color);
+  transition: color 0.6s ease-in-out;
+}
 
 /* Override de estilos de Instagram embed */
 .instagram-media {

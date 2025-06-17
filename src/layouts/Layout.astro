@@ -27,7 +27,7 @@ const fullTitle = title === "Inicio" ? "Mocawa Café - Tu pausa perfecta" : `${t
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   </head>
   
-  <body>
+  <body class={`${Astro.url.pathname === '/menu' ? 'menu-theme' : ''}`}>
     <Header />
     
     <main class="pt-16">

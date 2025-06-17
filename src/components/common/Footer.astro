@@ -3,21 +3,21 @@ import "../../styles/global.css"
 import { MapPin, Clock, Phone, Instagram, Facebook } from '@lucide/astro';
 ---
 
-<footer class="bg-sage-darker text-white">
+<footer class="bg-section text-layout border-t border-card">
   <div class="container-mocawa py-12">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       
       <!-- Info del negocio -->
       <div>
         <img src="/img/logo-mocawa.png" alt="Mocawa Café" class="h-12 w-auto mb-4" />
-        <p class="text-gray-300 mb-4">Café 100% quindiano y pan fresco diario. Tu pausa perfecta en el corazón de Armenia.</p>
+        <p class="text-layout opacity-80 mb-4">Café 100% quindiano y pan fresco diario. Tu pausa perfecta en el corazón de Armenia.</p>
         
         <!-- Redes sociales -->
         <div class="flex space-x-4">
-          <a href="https://instagram.com/mocawacafe" target="_blank" class="text-gray-300 hover:text-white transition-colors">
+          <a href="https://instagram.com/mocawacafe" target="_blank" class="text-layout opacity-70 hover:opacity-100 hover:text-accent transition-all">
             <Instagram size={20} />
           </a>
-          <a href="https://facebook.com/mocawacafe" target="_blank" class="text-gray-300 hover:text-white transition-colors">
+          <a href="https://facebook.com/mocawacafe" target="_blank" class="text-layout opacity-70 hover:opacity-100 hover:text-accent transition-all">
             <Facebook size={20} />
           </a>
         </div>
@@ -25,19 +25,19 @@ import { MapPin, Clock, Phone, Instagram, Facebook } from '@lucide/astro';
       
       <!-- Enlaces rápidos -->
       <div>
-        <h3 class="font-semibold mb-4">Enlaces Rápidos</h3>
+        <h3 class="text-header font-semibold mb-4">Enlaces Rápidos</h3>
         <div class="space-y-2">
-          <a href="/menu" class="block text-gray-300 hover:text-white transition-colors">Nuestro Menú</a>
-          <a href="/nosotros" class="block text-gray-300 hover:text-white transition-colors">Sobre Nosotros</a>
-          <a href="/blog" class="block text-gray-300 hover:text-white transition-colors">Blog</a>
+          <a href="/menu" class="block text-layout opacity-80 hover:opacity-100 hover:text-accent transition-all">Nuestro Menú</a>
+          <a href="/nosotros" class="block text-layout opacity-80 hover:opacity-100 hover:text-accent transition-all">Sobre Nosotros</a>
+          <a href="/blog" class="block text-layout opacity-80 hover:opacity-100 hover:text-accent transition-all">Blog</a>
           <a href="https://wa.me/573126282487" target="_blank" class="block text-whatsapp hover:text-green-400 transition-colors">Pedir por WhatsApp</a>
         </div>
       </div>
       
       <!-- Contacto e info -->
       <div>
-        <h3 class="font-semibold mb-4">Visitanos</h3>
-        <div class="space-y-3 text-gray-300">
+        <h3 class="text-header font-semibold mb-4">Visitanos</h3>
+        <div class="space-y-3 text-layout opacity-80">
           <div class="flex items-start space-x-2">
             <MapPin size={16} class="mt-1 flex-shrink-0" />
             <span class="text-sm">CC Mocawa Plaza<br />Primer Piso, Armenia, Quindío</span>
@@ -57,8 +57,8 @@ import { MapPin, Clock, Phone, Instagram, Facebook } from '@lucide/astro';
     </div>
     
     <!-- Copyright -->
-    <div class="border-t border-sage-dark mt-8 pt-8 text-center">
-      <p class="text-gray-400 text-sm">
+    <div class="border-t border-card mt-8 pt-8 text-center">
+      <p class="text-layout opacity-60 text-sm">
         © 2025 Mocawa Café. Todos los derechos reservados.
       </p>
     </div>

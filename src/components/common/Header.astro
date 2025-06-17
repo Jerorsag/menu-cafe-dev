@@ -3,49 +3,49 @@ import "../../styles/global.css"
 import { Menu, ShoppingCart, MapPin } from '@lucide/astro';
 ---
 
-<header class="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-gray-100 z-50">
+<header class="fixed top-0 w-full bg-header border-b border-card z-50">
   <div class="container-mocawa">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
-      <a href="#home" class="flex items-center">
+      <a href="/" class="flex items-center">
         <img src="/img/logo-mocawa.png" alt="Mocawa Café" class="h-10 w-auto" />
       </a>
       
       <!-- Navegación Desktop -->
       <nav class="hidden md:flex items-center space-x-8">
-        <a href="/menu" class="text-sage-darker hover:text-sage-dark transition-colors font-medium">Menú</a>
-        <a href="/nosotros" class="text-sage-darker hover:text-sage-dark transition-colors font-medium">Nosotros</a>
-        <a href="/blog" class="text-sage-darker hover:text-sage-dark transition-colors font-medium">Blog</a>
+        <a href="/menu" class="text-header hover:text-accent transition-colors font-medium">Menú</a>
+        <a href="/nosotros" class="text-header hover:text-accent transition-colors font-medium">Nosotros</a>
+        <a href="/blog" class="text-header hover:text-accent transition-colors font-medium">Blog</a>
       </nav>
       
       <!-- Acciones -->
       <div class="flex items-center space-x-4">
         <!-- Ubicación -->
-        <a href="#ubicacion" class="hidden sm:flex items-center text-sage-dark hover:text-sage-darker transition-colors">
+        <a href="#ubicacion" class="hidden sm:flex items-center text-header hover:text-accent transition-colors">
           <MapPin size={20} />
           <span class="ml-1 text-sm font-medium">CC Mocawa Plaza</span>
         </a>
         
         <!-- Carrito -->
-        <button id="cart-btn" class="relative text-sage-dark hover:text-sage-darker transition-colors">
+        <button id="cart-btn" class="relative text-header hover:text-accent transition-colors">
           <ShoppingCart size={24} />
           <span id="cart-count" class="absolute -top-2 -right-2 bg-accent-dark text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
         </button>
         
         <!-- Menú móvil -->
-        <button id="mobile-menu-btn" class="md:hidden text-sage-dark hover:text-sage-darker transition-colors">
+        <button id="mobile-menu-btn" class="md:hidden text-header hover:text-accent transition-colors">
           <Menu size={24} />
         </button>
       </div>
     </div>
     
     <!-- Menú móvil -->
-    <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-gray-100 mt-4 pt-4">
+    <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-card mt-4 pt-4">
       <div class="flex flex-col space-y-3">
-        <a href="/menu" class="text-sage-darker hover:text-sage-dark py-2 font-medium transition-colors">Menú</a>
-        <a href="/nosotros" class="text-sage-darker hover:text-sage-dark py-2 font-medium transition-colors">Nosotros</a>
-        <a href="/blog" class="text-sage-darker hover:text-sage-dark py-2 font-medium transition-colors">Blog</a>
-        <a href="#ubicacion" class="text-sage-dark hover:text-sage-darker py-2 text-sm font-medium transition-colors flex items-center">
+        <a href="/menu" class="text-header hover:text-accent py-2 font-medium transition-colors">Menú</a>
+        <a href="/nosotros" class="text-header hover:text-accent py-2 font-medium transition-colors">Nosotros</a>
+        <a href="/blog" class="text-header hover:text-accent py-2 font-medium transition-colors">Blog</a>
+        <a href="#ubicacion" class="text-header hover:text-accent py-2 text-sm font-medium transition-colors flex items-center">
           <MapPin size={16} class="mr-2" />
           CC Mocawa Plaza
         </a>

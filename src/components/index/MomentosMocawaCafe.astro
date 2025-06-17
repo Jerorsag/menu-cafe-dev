@@ -3,18 +3,18 @@ import "../../styles/global.css"
 import { Instagram } from '@lucide/astro';
 ---
 
-<section class="relative w-full bg-gradient-to-br from-gray-50 to-white py-16 lg:py-20">
+<section class="relative w-full bg-gradient-to-br from-[var(--sage)] to-[var(--sage-dark)] py-16 lg:py-20">
   <div class="container-mocawa">
     <!-- Header de la sección -->
     <div class="text-center mb-16">
       <div class="inline-flex items-center gap-2 mb-4">
         <Instagram class="text-pink-500 w-6 h-6" />
-        <span class="text-[var(--sage)] font-medium text-sm uppercase tracking-wide">Síguenos</span>
+        <span class="text-[var(--sage-darker)] text-sm uppercase tracking-wide">Síguenos</span>
       </div>
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--sage-darker)] mb-4">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
         Momentos Mocawa Cafe
       </h2>
-      <p class="text-gray-600 text-lg max-w-2xl mx-auto mb-8">
+      <p class="text-[var(--sage-darker)] font-medium text-lg max-w-2xl mx-auto mb-8">
         Únete a nuestra comunidad en Instagram y descubre los momentos únicos 
         que vivimos cada día en nuestro café.
       </p>
@@ -65,7 +65,7 @@ import { Instagram } from '@lucide/astro';
     </div>
 
   <!-- Decoración de fondo -->
-  <div class="absolute top-0 left-0 w-72 h-72 bg-gradient-to-br from-pink-500/5 to-orange-500/5 rounded-full -translate-y-36 -translate-x-36 pointer-events-none z-0"></div>
+  <div class="absolute top-0 left-0 w-72 h-72 bg-gradient-to-br from-white-500/5 to-gray-700/5 rounded-full -translate-y-36 -translate-x-36 pointer-events-none z-0"></div>
   <div class="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-[var(--sage)]/5 to-transparent rounded-full translate-y-48 pointer-events-none z-0"></div>
 </section>
 
