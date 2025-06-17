@@ -1,0 +1,136 @@
+---
+import { Croissant, Coffee, IceCream, Cookie } from '@lucide/astro';
+
+const categories = [
+  {
+    id: 'panaderia',
+    name: 'Panadería',
+    icon: 'Croissant',
+    count: 8,
+    description: 'Pan fresco horneado diariamente'
+  },
+  {
+    id: 'bebidas-calientes',
+    name: 'Bebidas Calientes',
+    icon: 'Coffee',
+    count: 12,
+    description: 'Café 100% quindiano'
+  },
+  {
+    id: 'bebidas-frias',
+    name: 'Bebidas Frías',
+    icon: 'IceCream',
+    count: 8,
+    description: 'Refrescantes y deliciosas'
+  },
+  {
+    id: 'snacks',
+    name: 'Snacks',
+    icon: 'Cookie',
+    count: 6,
+    description: 'Perfectos para acompañar'
+  }
+];
+---
+
+<div class="mb-8">
+  <!-- Tabs Header -->
+  <div class="flex flex-wrap gap-2 mb-6">
+    {categories.map((category) => (
+      <button 
+        class="category-tab flex items-center gap-3 px-6 py-3 rounded-xl font-medium transition-all duration-500 hover:scale-101 bg-card border border-card text-layout ease-in"
+        data-category={category.id}
+      >
+        <!-- Iconos dinámicos -->
+        {category.icon === 'Croissant' && <Croissant class="w-5 h-5" />}
+        {category.icon === 'Coffee' && <Coffee class="w-5 h-5" />}
+        {category.icon === 'IceCream' && <IceCream class="w-5 h-5" />}
+        {category.icon === 'Cookie' && <Cookie class="w-5 h-5" />}
+        
+        <div class="text-left">
+          <div class="font-semibold">{category.name}</div>
+          <div class="text-xs opacity-70">{category.count} productos</div>
+        </div>
+      </button>
+    ))}
+  </div>
+  
+  <!-- Descripción de Categoría Activa -->
+  <div class="bg-card rounded-lg p-4 border border-card">
+    <p id="category-description" class="text-layout opacity-80 text-center">
+      Pan fresco horneado diariamente
+    </p>
+  </div>
+</div>
+
+<script>
+  // Datos de categorías para JavaScript
+  const categoriesData = {
+    'panaderia': {
+      name: 'Panadería',
+      description: 'Pan fresco horneado diariamente con ingredientes de primera calidad'
+    },
+    'bebidas-calientes': {
+      name: 'Bebidas Calientes',
+      description: 'Café 100% quindiano y bebidas calientes preparadas con amor'
+    },
+    'bebidas-frias': {
+      name: 'Bebidas Frías',
+      description: 'Refrescantes bebidas frías perfectas para cualquier momento del día'
+    },
+    'snacks': {
+      name: 'Snacks',
+      description: 'Perfectos acompañantes para tu café o como merienda saludable'
+    }
+  };
+  
+  // Función para cambiar categoría activa
+  function setActiveCategory(categoryId) {
+    // Remover clase activa de todos los tabs
+    document.querySelectorAll('.category-tab').forEach(tab => {
+      tab.classList.remove('bg-button-primary-bg', 'text-button-primary-text', 'shadow-lg');
+      tab.classList.add('bg-card', 'text-layout');
+    });
+    
+    // Agregar clase activa al tab seleccionado
+    const activeTab = document.querySelector(`[data-category="${categoryId}"]`);
+    if (activeTab) {
+      activeTab.classList.remove('bg-card', 'text-layout');
+      activeTab.classList.add('bg-button-primary-bg', 'text-button-primary-text', 'shadow-lg');
+    }
+    
+    // Actualizar descripción
+    const descriptionEl = document.getElementById('category-description');
+    if (descriptionEl && categoriesData[categoryId]) {
+      descriptionEl.textContent = categoriesData[categoryId].description;
+    }
+    
+    // Actualizar estado global
+    if (window.updateMenuState) {
+      window.updateMenuState({ activeCategory: categoryId });
+    }
+  }
+  
+  // Event listeners para los tabs
+  document.querySelectorAll('.category-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const categoryId = tab.getAttribute('data-category');
+      setActiveCategory(categoryId);
+    });
+  });
+  
+  // Inicializar con la primera categoría activa
+  document.addEventListener('DOMContentLoaded', () => {
+    setActiveCategory('panaderia');
+  });
+  
+  // Aplicar estilos dinámicos basados en variables CSS
+  const style = document.createElement('style');
+  style.textContent = `
+    .category-tab.bg-button-primary-bg {
+      background-color: var(--button-primary-bg) !important;
+      color: var(--button-primary-text) !important;
+    }
+  `;
+  document.head.appendChild(style);
+</script>

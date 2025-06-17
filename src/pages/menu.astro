@@ -1,13 +1,65 @@
 ---
-import HeroCarousel from '../components/index/HeroCarousel.astro';
-import FavoritosMes from '../components/index/FavoritosMes.astro';
-import MomentosMocawaCafe from '../components/index/MomentosMocawaCafe.astro';
-import Ubicacion from '../components/index/Ubicacion.astro';
 import Layout from '../layouts/Layout.astro';
+import MenuHeader from '../components/menu/MenuHeader.astro';
+import MenuTabs from '../components/menu/MenuTabs.astro';
+import MenuSidebar from '../components/menu/MenuSidebar.astro';
+// import ProductGrid from '../components/menu/ProductGrid.astro';
+// import MenuFooter from '../components/menu/MenuFooter.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout title='Menu'>
+    <MenuHeader />
+    
+    <!-- Contenido Principal -->
+    <div class="container-mocawa py-8">
+      <div class="flex flex-col lg:flex-row gap-8">
+        
+        <!-- Sidebar de Filtros (Colapsable en móvil) -->
+        <aside class="lg:w-80 flex-shrink-0">
+          <MenuSidebar />
+        </aside>
+        
+        <!-- Área Principal del Menú -->
+        <section class="flex-1 min-w-0">
+          <!-- Tabs de Categorías -->
+          <MenuTabs />
+          
+          <!-- Grid de Productos
+          <ProductGrid /> -->
+        </section>
+        
+      </div>
+    </div>
+    
+    <!-- Footer del Menú
+    <MenuFooter /> -->
+  </main>
 </Layout>
+
+<script>
+  // Estado global del menú
+  window.menuState = {
+    activeCategory: 'panaderia',
+    activeFilters: [],
+    cartItems: JSON.parse(localStorage.getItem('mocawa-cart') || '[]'),
+    sidebarOpen: false
+  };
+  
+  // Función para actualizar el estado
+  function updateMenuState(newState) {
+    window.menuState = { ...window.menuState, ...newState };
+    window.dispatchEvent(new CustomEvent('menu-state-changed', { detail: window.menuState }));
+  }
+  
+  // Función para toggle sidebar en móvil
+  function toggleSidebar() {
+    updateMenuState({ sidebarOpen: !window.menuState.sidebarOpen });
+  }
+  
+  // Exportar funciones globalmente
+  window.updateMenuState = updateMenuState;
+  window.toggleSidebar = toggleSidebar;
+</script>
