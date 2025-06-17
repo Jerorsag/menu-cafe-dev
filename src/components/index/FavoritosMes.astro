@@ -1,5 +1,5 @@
 ---
-import "../styles/global.css"
+import "../../styles/global.css"
 import { Star, Heart } from '@lucide/astro';
 
 const favoritosDelMes = [
@@ -33,7 +33,7 @@ const favoritosDelMes = [
   {
     id: 4,
     nombre: "Granizado de Cafe",
-    descripcion: "Nuestro secreto mejor guardado",
+    descripcion: "Nuestro mejor secreto",
     precio: "$6.800",
     imagen: "/img/products/granizado.png",
     alt: "Cappuccino especial de la casa",
@@ -97,9 +97,9 @@ const favoritosDelMes = [
 
             {/* Precio y CTA */}
             <div class="flex items-center justify-between">
-              <div class="text-2xl font-bold text-[var(--sage-darker)]">
+              <p class="text-xl font-bold text-[var(--sage-darker)]">
                 {producto.precio}
-              </div>
+              </p>
               <button class="bg-[var(--sage)] hover:bg-[var(--sage-dark)] text-white px-4 py-2 rounded-xl font-medium transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 ease-in cursor-pointer">
                 Ordenar
               </button>
