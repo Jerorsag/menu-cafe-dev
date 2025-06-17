@@ -11,8 +11,9 @@
   --whatsapp: #25D366;
 }
 
-@layer base {
   html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem; 
     font-size: 18px;
   }
   
@@ -48,9 +49,7 @@
     h4 { font-size: 1.5rem; }
     p { font-size: 1rem; }
   }
-}
 
-@layer components {
   .btn-primary {
     @apply px-6 py-3 bg-[var(--sage-dark)] text-white rounded-lg font-medium hover:bg-[var(--sage-darker)] transition-all duration-200;
   }
@@ -74,7 +73,6 @@
   .bg-sage-dark { background-color: var(--sage-dark); }
   .bg-sage-darker { background-color: var(--sage-darker); }
   .bg-accent-dark { background-color: var(--accent-dark); }
-}
 
 /* Override de estilos de Instagram embed */
 .instagram-media {
