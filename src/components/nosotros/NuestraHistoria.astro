@@ -1,0 +1,372 @@
+---
+import "../../styles/global.css"
+import { Coffee, Heart, Users, Zap, Smartphone, Star } from '@lucide/astro';
+---
+
+<section id="nuestra-historia" class="py-16 lg:py-24 bg-background">
+  <div class="container-mocawa">
+    <!-- Encabezado de Sección -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 mb-6">
+        <Coffee class="text-accent w-6 h-6" />
+        <span class="text-accent font-medium text-sm uppercase tracking-wide">Nuestra Historia</span>
+      </div>
+      
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--sage-darker)] mb-6">
+        Cada año, una nueva
+        <span class="text-accent">
+          historia que contar
+        </span>
+      </h2>
+      
+      <p class="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+        Desde nuestros primeros días hasta convertirnos en el corazón del CC Mocawa Plaza, 
+        cada momento ha sido construido con amor, dedicación y mucho, mucho café.
+      </p>
+    </div>
+
+    <!-- Timeline Visual -->
+    <div class="relative">
+      <!-- Línea vertical del timeline (desktop) -->
+      <div class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-accent via-accent-dark to-accent opacity-20"></div>
+      
+      <!-- Timeline Items -->
+      <div class="space-y-12 lg:space-y-16">
+        
+        <!-- 2019: El sueño comenzó -->
+        <div class="relative">
+          <div class="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+            <!-- Contenido (Izquierda en desktop) -->
+            <div class="lg:text-right lg:pr-8">
+              <div class="inline-flex items-center gap-2 mb-4">
+                <div class="bg-accent text-gray-500 px-3 py-1 rounded-full text-sm font-semibold">
+                  2019
+                </div>
+                <Heart class="text-accent w-5 h-5" />
+              </div>
+              
+              <h3 class="text-2xl md:text-3xl font-bold text-[var(--sage-darker)] mb-4">
+                El sueño comenzó
+              </h3>
+              
+              <p class="text-muted-foreground text-lg leading-relaxed mb-4">
+                Con una idea simple pero poderosa: crear un espacio donde cada persona pudiera 
+                encontrar su momento perfecto de pausa. Iniciamos en el CC Mocawa Plaza con 
+                mucha ilusión y las mejores intenciones.
+              </p>
+              
+              <div class="flex items-center gap-4 justify-start lg:justify-end">
+                <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div class="w-2 h-2 bg-gray-500 rounded-full"></div>
+                  <span>Apertura oficial</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span>Primeros equipos</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Imagen (Derecha en desktop) -->
+            <div class="mt-6 lg:mt-0 lg:pl-8">
+              <div class="relative group">
+                <img 
+                  src="/img/historia/2019-inicio.png" 
+                  alt="Inicio de Mocawa Café en 2019"
+                  class="w-full h-64 lg:h-80 object-cover rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Punto del timeline (desktop) -->
+          <div class="hidden lg:block absolute left-1/2 top-8 transform -translate-x-1/2 w-4 h-4 bg-accent rounded-full border-4 border-background shadow-lg z-10"></div>
+        </div>
+
+        <!-- 2020: Primeros clientes fieles -->
+        <div class="relative">
+          <div class="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+            <!-- Imagen (Izquierda en desktop) -->
+            <div class="lg:order-1 lg:pr-8">
+              <div class="relative group">
+                <img 
+                  src="/img/historia/2020-clientes.png" 
+                  alt="Primeros clientes fieles en 2020"
+                  class="w-full h-64 lg:h-80 object-cover rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+              </div>
+            </div>
+            
+            <!-- Contenido (Derecha en desktop) -->
+            <div class="mt-6 lg:mt-0 lg:order-2 lg:pl-8">
+              <div class="inline-flex items-center gap-2 mb-4">
+                <div class="bg-accent text-gray-500 px-3 py-1 rounded-full text-sm font-semibold">
+                  2020
+                </div>
+                <Users class="text-accent w-5 h-5" />
+              </div>
+              
+              <h3 class="text-2xl md:text-3xl font-bold text-[var(--sage-darker)] mb-4">
+                Primeros clientes fieles
+              </h3>
+              
+              <p class="text-muted-foreground text-lg leading-relaxed mb-4">
+                A pesar de los desafíos del año, logramos crear una comunidad de clientes 
+                que se convirtieron en parte de nuestra familia. Cada rostro familiar 
+                que llegaba nos motivaba a seguir mejorando día a día.
+              </p>
+              
+              <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <span>Comunidad leal</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+                  <span>Adaptación constante</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Punto del timeline (desktop) -->
+          <div class="hidden lg:block absolute left-1/2 top-8 transform -translate-x-1/2 w-4 h-4 bg-accent rounded-full border-4 border-background shadow-lg z-10"></div>
+        </div>
+
+        <!-- 2021: Crecimiento en pandemia -->
+        <div class="relative">
+          <div class="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+            <!-- Contenido (Izquierda en desktop) -->
+            <div class="lg:text-right lg:pr-8">
+              <div class="inline-flex items-center gap-2 mb-4">
+                <div class="bg-accent text-gray-500 px-3 py-1 rounded-full text-sm font-semibold">
+                  2021
+                </div>
+                <Zap class="text-accent w-5 h-5" />
+              </div>
+              
+              <h3 class="text-2xl md:text-3xl font-bold text-[var(--sage-darker)] mb-4">
+                Crecimiento en pandemia
+              </h3>
+              
+              <p class="text-muted-foreground text-lg leading-relaxed mb-4">
+                Cuando el mundo se detuvo, nosotros encontramos formas de seguir conectando 
+                con nuestra comunidad. Implementamos nuevos protocolos y servicios, 
+                demostrando que la calidad y el cuidado nunca se detienen.
+              </p>
+              
+              <div class="flex items-center gap-4 justify-start lg:justify-end">
+                <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                  <span>Nuevos protocolos</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+                  <span>Servicios adaptados</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Imagen (Derecha en desktop) -->
+            <div class="mt-6 lg:mt-0 lg:pl-8">
+              <div class="relative group">
+                <img 
+                  src="/img/historia/2021-pandemia.png" 
+                  alt="Crecimiento durante pandemia 2021"
+                  class="w-full h-64 lg:h-80 object-cover rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Punto del timeline (desktop) -->
+          <div class="hidden lg:block absolute left-1/2 top-8 transform -translate-x-1/2 w-4 h-4 bg-accent rounded-full border-4 border-background shadow-lg z-10"></div>
+        </div>
+
+        <!-- 2022: Renovación y expansión -->
+        <div class="relative">
+          <div class="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+            <!-- Imagen (Izquierda en desktop) -->
+            <div class="lg:order-1 lg:pr-8">
+              <div class="relative group">
+                <img 
+                  src="/img/historia/2022-renovacion.png" 
+                  alt="Renovación y expansión 2022"
+                  class="w-full h-64 lg:h-80 object-cover rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+              </div>
+            </div>
+            
+            <!-- Contenido (Derecha en desktop) -->
+            <div class="mt-6 lg:mt-0 lg:order-2 lg:pl-8">
+              <div class="inline-flex items-center gap-2 mb-4">
+                <div class="bg-accent text-gray-500 px-3 py-1 rounded-full text-sm font-semibold">
+                  2022
+                </div>
+                <Star class="text-accent w-5 h-5" />
+              </div>
+              
+              <h3 class="text-2xl md:text-3xl font-bold text-[var(--sage-darker)] mb-4">
+                Renovación y expansión
+              </h3>
+              
+              <p class="text-muted-foreground text-lg leading-relaxed mb-4">
+                Renovamos completamente nuestro espacio para ofrecerte una experiencia 
+                aún más cómoda y acogedora. Nuevos equipos, nuevos sabores, 
+                pero el mismo amor de siempre en cada taza.
+              </p>
+              
+              <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div class="w-2 h-2 bg-teal-500 rounded-full"></div>
+                  <span>Renovación completa</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div class="w-2 h-2 bg-indigo-500 rounded-full"></div>
+                  <span>Nuevos equipos</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Punto del timeline (desktop) -->
+          <div class="hidden lg:block absolute left-1/2 top-8 transform -translate-x-1/2 w-4 h-4 bg-accent rounded-full border-4 border-background shadow-lg z-10"></div>
+        </div>
+
+        <!-- 2023: Comunidad Mocawa consolidada -->
+        <div class="relative">
+          <div class="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+            <!-- Contenido (Izquierda en desktop) -->
+            <div class="lg:text-right lg:pr-8">
+              <div class="inline-flex items-center gap-2 mb-4">
+                <div class="bg-accent text-gray-500 px-3 py-1 rounded-full text-sm font-semibold">
+                  2023
+                </div>
+                <Users class="text-accent w-5 h-5" />
+              </div>
+              
+              <h3 class="text-2xl md:text-3xl font-bold text-[var(--sage-darker)] mb-4">
+                Comunidad Mocawa consolidada
+              </h3>
+              
+              <p class="text-muted-foreground text-lg leading-relaxed mb-4">
+                Ya no éramos solo una cafetería, nos convertimos en el punto de encuentro 
+                oficial del CC Mocawa Plaza. Eventos, celebraciones, reuniones de trabajo... 
+                nuestro espacio se llenó de vida y historias.
+              </p>
+              
+              <div class="flex items-center gap-4 justify-start lg:justify-end">
+                <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
+                  <span>Punto de encuentro</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                  <span>Eventos especiales</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Imagen (Derecha en desktop) -->
+            <div class="mt-6 lg:mt-0 lg:pl-8">
+              <div class="relative group">
+                <img 
+                  src="/img/historia/2023-comunidad.png" 
+                  alt="Comunidad Mocawa consolidada 2023"
+                  class="w-full h-64 lg:h-80 object-cover rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Punto del timeline (desktop) -->
+          <div class="hidden lg:block absolute left-1/2 top-8 transform -translate-x-1/2 w-4 h-4 bg-accent rounded-full border-4 border-background shadow-lg z-10"></div>
+        </div>
+
+        <!-- 2024: Transformación digital -->
+        <div class="relative">
+          <div class="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+            <!-- Imagen (Izquierda en desktop) -->
+            <div class="lg:order-1 lg:pr-8">
+              <div class="relative group">
+                <img 
+                  src="/img/historia/2024-digital.png" 
+                  alt="Transformación digital 2024"
+                  class="w-full h-64 lg:h-80 object-cover rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+              </div>
+            </div>
+            
+            <!-- Contenido (Derecha en desktop) -->
+            <div class="mt-6 lg:mt-0 lg:order-2 lg:pl-8">
+              <div class="inline-flex items-center gap-2 mb-4">
+                <div class="bg-gradient-to-r from-accent to-accent-dark text-gray-500 px-3 py-1 rounded-full text-sm font-semibold">
+                  2024
+                </div>
+                <Smartphone class="text-accent w-5 h-5" />
+              </div>
+              
+              <h3 class="text-2xl md:text-3xl font-bold text-[var(--sage-darker)] mb-4">
+                Transformación digital
+              </h3>
+              
+              <p class="text-muted-foreground text-lg leading-relaxed mb-4">
+                Lanzamos nuestra plataforma digital para que puedas disfrutar de Mocawa 
+                donde quieras, cuando quieras. Pedidos online, programa de fidelidad, 
+                y mucho más. El futuro del café ya está aquí.
+              </p>
+              
+              <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <span>Plataforma digital</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                  <span>Futuro presente</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Punto del timeline (desktop) -->
+          <div class="hidden lg:block absolute left-1/2 top-8 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-r from-accent to-accent-dark rounded-full border-4 border-background shadow-lg z-10"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="text-center mt-16 lg:mt-20">
+      <div class="bg-card rounded-2xl p-8 lg:p-12">
+        <h3 class="text-2xl md:text-3xl font-bold text-foreground mb-4">
+          ¿Quieres ser parte de nuestra historia?
+        </h3>
+        <p class="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
+          Cada cliente que llega a Mocawa no solo compra un café, 
+          se convierte en parte de nuestra familia y de nuestra historia.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#conoce-equipo" class="btn-primary">
+            Conoce Nuestro Equipo
+          </a>
+          <a href="/menu" class="text-[var(--sage-darker)] px-8 py-3 rounded-xl font-semibold min-w-[200px] text-center">
+              Ver Nuestro Menú
+            </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
