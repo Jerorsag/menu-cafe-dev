@@ -1,0 +1,149 @@
+---
+// src/components/nosotros/NuestrosValores.astro
+import "../../styles/global.css"
+import { Leaf, Zap, Heart, Users, Award } from '@lucide/astro';
+---
+
+<section class="py-12 lg:py-16 bg-gradient-to-br from-[var(--sage)] to-[var(--sage-dark)]">
+  <div class="container-mocawa">
+    <!-- Encabezado de Sección -->
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 mb-4 text-white">
+        <Award class="w-5 h-5" />
+        <span class="text-gray-200 font-medium uppercase tracking-wide">Nuestros Valores</span>
+      </div>
+      
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--sage-darker)] mb-4">
+        Los pilares que nos
+        <span class="bg-gradient-to-r text-white bg-clip-text">
+          definen cada día
+        </span>
+      </h2>
+      
+      <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
+        Más que palabras bonitas, son los valores que vives en cada visita a Mocawa.
+      </p>
+    </div>
+
+    <!-- Grid Horizontal de Valores -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-12">
+      
+      <!-- Valor 1: CALIDAD AUTÉNTICA -->
+      <div class="group relative">
+        <div class="bg-card rounded-2xl p-6 h-full hover:shadow-2xl ease-in">
+          <!-- Icono y Badge -->
+          <div class="text-center mb-4">
+            <div class="relative mx-auto">
+              <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center group-hover:scale-102 transition-transform duration-300 mx-auto">
+                <Leaf class="text-white w-6 h-6" />
+              </div>
+            </div>
+            <div class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold mt-3 inline-block">
+              CALIDAD AUTÉNTICA
+            </div>
+          </div>
+          
+          <!-- Contenido -->
+          <h5 class="text-base font-bold text-foreground mb-2 text-center group-hover:text-accent transition-colors duration-300">
+            Café que cuenta historias
+          </h5>
+          
+          <p class="text-muted-foreground text-sm leading-relaxed text-center">
+            Cada grano viene directamente de las fincas quindianas que visitamos personalmente.
+          </p>
+        </div>
+      </div>
+
+      <!-- Valor 2: EFICIENCIA CON CORAZÓN -->
+      <div class="group relative">
+        <div class="bg-card rounded-2xl p-6 h-full hover:shadow-2xl ease-in">
+          <!-- Icono y Badge -->
+          <div class="text-center mb-4">
+            <div class="relative mx-auto">
+              <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center group-hover:scale-102 transition-transform duration-300 mx-auto">
+                <Zap class="text-white w-6 h-6" />
+              </div>
+            </div>
+            <div class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-semibold mt-3 inline-block">
+              EFICIENCIA CON CORAZÓN
+            </div>
+          </div>
+          
+          <!-- Contenido -->
+          <h5 class="text-base font-bold text-foreground mb-2 text-center group-hover:text-accent transition-colors duration-300">
+            Tu tiempo es lo mas valioso
+          </h5>
+          
+          <p class="text-muted-foreground text-sm leading-relaxed text-center">
+            Respetamos tu tiempo sin sacrificar la calidad que mereces.
+          </p>
+        </div>
+      </div>
+
+      <!-- Valor 3: BIENESTAR GENUINO -->
+      <div class="group relative">
+        <div class="bg-card rounded-2xl p-6 h-full hover:shadow-2xl ease-in">
+          <!-- Icono y Badge -->
+          <div class="text-center mb-4">
+            <div class="relative mx-auto">
+              <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl flex items-center justify-center group-hover:scale-102 transition-transform duration-300 mx-auto">
+                <Heart class="text-white w-6 h-6" />
+              </div>
+            </div>
+            <div class="bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs font-semibold mt-3 inline-block">
+              BIENESTAR GENUINO
+            </div>
+          </div>
+          
+          <!-- Contenido -->
+          <h5 class="text-base font-bold text-foreground mb-2 text-center group-hover:text-accent transition-colors duration-300">
+            Tu refugio de tranquilidad
+          </h5>
+          
+          <p class="text-muted-foreground text-sm leading-relaxed text-center">
+            Creamos el espacio perfecto para tu momento de calma en el día.
+          </p>
+        </div>
+      </div>
+
+      <!-- Valor 4: COMUNIDAD LOCAL -->
+      <div class="group relative">
+        <div class="bg-card rounded-2xl p-6 h-full hover:shadow-2xl ease-in">
+          <!-- Icono y Badge -->
+          <div class="text-center mb-4">
+            <div class="relative mx-auto">
+              <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center group-hover:scale-102 transition-transform duration-300 mx-auto">
+                <Users class="text-white w-6 h-6" />
+              </div>
+            </div>
+            <div class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-semibold mt-3 inline-block">
+                COMUNIDAD LOCAL
+            </div>
+          </div>
+          
+          <!-- Contenido -->
+          <h5 class="text-base font-bold text-foreground mb-2 text-center group-hover:text-accent transition-colors duration-300">
+            El corazón de Mocawa Plaza
+          </h5>
+          
+          <p class="text-muted-foreground text-sm leading-relaxed text-center">
+            Somos el punto de encuentro de nuestra comunidad.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Call to Action -->
+    <div class="text-center">
+      <div class="inline-flex flex-col sm:flex-row gap-4 items-center">
+        <a href="#conoce-equipo" class="btn-primary">
+          Conoce Quiénes Viven Estos Valores
+        </a>
+        <a href="/contacto" class="btn-secondary border-white text-white hover:border-white/80 hover:text-white/90 transition-all duration-300 px-8 py-3 rounded-xl font-semibold min-w-[200px] text-center">
+          Comparte Tu Experiencia
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
