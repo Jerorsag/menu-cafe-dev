@@ -1,0 +1,102 @@
+---
+import "../../styles/global.css"
+import { Coffee, BookOpen, Users, Star, Leaf, Briefcase, Heart, Home } from '@lucide/astro';
+---
+
+<section class="relative bg-gradient-to-br from-[var(--sage)] to-[var(--sage-dark)] border-b border-white/10 overflow-hidden">
+  <div class="container-mocawa py-16 lg:py-20 relative">
+    <!-- Contenido Principal -->
+    <div class="text-center">
+      <!-- Encabezado -->
+      <div class="mb-12">
+        <div class="inline-flex items-center gap-2 mb-6">
+          <BookOpen class="text-white w-6 h-6" />
+          <span class="text-white font-medium text-sm uppercase tracking-wide">Blog Mocawa</span>
+        </div>
+        
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+          Historias que 
+          <span class="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+            inspiran
+          </span>
+        </h1>
+        
+        <p class="text-white/90 text-lg md:text-xl max-w-3xl mx-auto mb-8 leading-relaxed">
+          Descubre el mundo del café quindiano, consejos de productividad, bienestar y las últimas novedades 
+          de nuestra comunidad en el corazón de Armenia.
+        </p>
+      </div>
+
+      <!-- Categorías Estratégicas -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8 max-w-4xl mx-auto">
+        <!-- Cultura Cafetera -->
+        <div class="flex flex-col items-center gap-3 bg-card/10 backdrop-blur-sm px-4 py-6 rounded-xl border border-white/10">
+          <Leaf class="text-green-400 w-8 h-8" />
+          <div class="text-center">
+            <div class="text-white font-bold text-lg">30%</div>
+            <div class="text-white/80 text-sm">Cultura Cafetera</div>
+          </div>
+        </div>
+        
+        <!-- Vida Profesional -->
+        <div class="flex flex-col items-center gap-3 bg-card/10 backdrop-blur-sm px-4 py-6 rounded-xl border border-white/10">
+          <Briefcase class="text-blue-400 w-8 h-8" />
+          <div class="text-center">
+            <div class="text-white font-bold text-lg">25%</div>
+            <div class="text-white/80 text-sm">Vida Profesional</div>
+          </div>
+        </div>
+        
+        <!-- Bienestar & Salud -->
+        <div class="flex flex-col items-center gap-3 bg-card/10 backdrop-blur-sm px-4 py-6 rounded-xl border border-white/10">
+          <Heart class="text-pink-400 w-8 h-8" />
+          <div class="text-center">
+            <div class="text-white font-bold text-lg">25%</div>
+            <div class="text-white/80 text-sm">Bienestar & Salud</div>
+          </div>
+        </div>
+        
+        <!-- Comunidad Mocawa -->
+        <div class="flex flex-col items-center gap-3 bg-card/10 backdrop-blur-sm px-4 py-6 rounded-xl border border-white/10">
+          <Home class="text-orange-400 w-8 h-8" />
+          <div class="text-center">
+            <div class="text-white font-bold text-lg">20%</div>
+            <div class="text-white/80 text-sm">Comunidad Mocawa</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Widget de Estado -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8">
+          <!-- Años de Experiencia -->
+          <div class="flex items-center gap-2 bg-card px-4 py-2 rounded-full border border-card">
+          <Coffee class="text-accent w-5 h-5" />
+            <span class="text-layout font-medium">+5 Articulos</span>
+          </div>
+          
+          <!-- Tiempo de Preparación -->
+          <div class="flex items-center gap-2 bg-card px-4 py-2 rounded-full border border-card">
+            <Star class="text-green-500 w-5 h-5" />
+            <span class="text-layout font-medium">Semanal</span>
+          </div>
+          
+          <!-- Calidad Garantizada -->
+          <div class="flex items-center gap-2 bg-card px-4 py-2 rounded-full border border-card">
+            <Users class="text-accent w-5 h-5" />
+            <span class="text-layout font-medium">Armenia</span>
+          </div>
+        </div>
+      
+      <!-- CTA -->
+      <div class="text-center">
+        <a href="#posts" class="btn-primary bg-white text-[var(--sage-darker)] hover:bg-white/90 transition-all duration-300 px-8 py-3 rounded-xl font-semibold">
+          Explorar Artículos
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Decoración de fondo -->
+  <div class="absolute top-0 right-0 w-72 h-72 bg-gradient-to-bl from-white/5 to-orange-500/5 rounded-full -translate-y-36 translate-x-36 pointer-events-none z-0"></div>
+  <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-[var(--sage)]/5 to-transparent rounded-full translate-y-48 -translate-x-48 pointer-events-none z-0"></div>
+</section>

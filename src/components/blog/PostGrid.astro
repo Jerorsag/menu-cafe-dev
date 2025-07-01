@@ -1,0 +1,184 @@
+---
+import "../../styles/global.css"
+import PostCard from './PostCard.astro';
+import { BookOpen, Filter, Leaf, Briefcase, Heart, Home } from '@lucide/astro';
+
+export interface Props {
+  posts: any[];
+  showTitle?: boolean;
+  maxPosts?: number;
+}
+
+const { posts, showTitle = true, maxPosts } = Astro.props;
+
+// Limitar posts si se especifica maxPosts
+const displayPosts = maxPosts ? posts.slice(0, maxPosts) : posts;
+
+// Separar post destacado (el más reciente) del resto
+const [featuredPost, ...regularPosts] = displayPosts;
+
+// Categorías según la estrategia
+const categories = [
+  { name: 'Todas', slug: 'todas', icon: Filter, color: 'text-accent' },
+  { name: 'Cultura Cafetera', slug: 'cultura-cafetera', icon: Leaf, color: 'text-green-500' },
+  { name: 'Vida Profesional', slug: 'vida-profesional', icon: Briefcase, color: 'text-blue-500' },
+  { name: 'Bienestar & Salud', slug: 'bienestar-salud', icon: Heart, color: 'text-pink-500' },
+  { name: 'Comunidad Mocawa', slug: 'comunidad-mocawa', icon: Home, color: 'text-orange-500' }
+];
+---
+
+<section class="py-16 lg:py-20 bg-background">
+  <div class="container-mocawa">
+    <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+      <!-- Contenido Principal -->
+      <div class="lg:col-span-8">
+        <div id="posts" class="scroll-mt-20">
+          {showTitle && (
+            <div class="text-center mb-12">
+              <div class="inline-flex items-center gap-2 mb-6">
+                <BookOpen class="text-accent w-6 h-6" />
+                <span class="text-accent font-medium text-sm uppercase tracking-wide">Últimos Artículos</span>
+              </div>
+              
+              <h2 class="text-3xl md:text-4xl font-bold text-layout mb-4">
+                Descubre nuestras 
+                <span class="text-accent">historias</span>
+              </h2>
+              
+              <p class="text-layout opacity-75 text-lg max-w-2xl mx-auto mb-8">
+                Explora artículos sobre cultura cafetera, productividad, bienestar y nuestra comunidad.
+              </p>
+
+              <!-- Filtros de Categorías -->
+              <div class="flex flex-wrap justify-center gap-3 mb-8">
+                {categories.map((category) => {
+                  const IconComponent = category.icon;
+                  return (
+                    <button class={`
+                      inline-flex items-center gap-2 px-4 py-2 rounded-full border 
+                      transition-all duration-200 hover:shadow-md
+                      ${category.slug === 'todas' 
+                        ? 'bg-accent text-white border-accent' 
+                        : 'bg-card text-layout border-card hover:border-accent hover:text-accent'
+                      }
+                    `}>
+                      <IconComponent class={`w-4 h-4 ${category.color}`} />
+                      <span class="text-sm font-medium">{category.name}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {displayPosts.length === 0 ? (
+            <!-- Estado vacío -->
+            <div class="text-center py-16">
+              <div class="mb-4">
+                <BookOpen class="w-16 h-16 text-accent mx-auto opacity-50" />
+              </div>
+              <h3 class="text-xl font-semibold text-layout mb-2">
+                Próximamente nuevos artículos
+              </h3>
+              <p class="text-layout opacity-60">
+                Estamos preparando contenido increíble para ti.
+              </p>
+            </div>
+          ) : (
+            <div class="space-y-8">
+              {/* Post destacado (más grande) */}
+              {featuredPost && (
+                <div class="mb-12">
+                  <div class="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center bg-card rounded-2xl border border-card overflow-hidden group hover:shadow-lg transition-all duration-300">
+                    <!-- Imagen del post destacado -->
+                    <div class="relative overflow-hidden">
+                      <img 
+                        src={featuredPost.data.image} 
+                        alt={featuredPost.data.title}
+                        class="w-full h-64 lg:h-80 object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="eager"
+                      />
+                      <div class="absolute top-4 left-4">
+                        <span class="bg-accent text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          Más Reciente
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <!-- Contenido del post destacado -->
+                    <div class="p-8">
+                      {featuredPost.data.tags && featuredPost.data.tags.length > 0 && (
+                        <div class="flex flex-wrap gap-2 mb-4">
+                          {featuredPost.data.tags.slice(0, 3).map((tag: string) => (
+                            <span class="bg-accent/10 text-accent px-3 py-1 rounded-md text-sm font-medium">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      
+                      <h2 class="text-2xl lg:text-3xl font-bold text-layout mb-4 group-hover:text-accent transition-colors duration-200">
+                        <a href={`/blog/${featuredPost.slug}`} class="hover:underline">
+                          {featuredPost.data.title}
+                        </a>
+                      </h2>
+                      
+                      <p class="text-layout opacity-75 text-lg mb-6 leading-relaxed">
+                        {featuredPost.data.description}
+                      </p>
+                      
+                      <div class="flex items-center justify-between">
+                        <div class="text-sm text-layout opacity-60">
+                          {new Intl.DateTimeFormat('es-CO', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                          }).format(featuredPost.data.publishDate)}
+                        </div>
+                        
+                        <a 
+                          href={`/blog/${featuredPost.slug}`}
+                          class="btn-primary hover:bg-accent-dark transition-colors duration-200"
+                        >
+                          Leer Artículo
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Grid de posts regulares */}
+              {regularPosts.length > 0 && (
+                <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                  {regularPosts.map((post) => (
+                    <PostCard
+                      title={post.data.title}
+                      description={post.data.description}
+                      image={post.data.image}
+                      publishDate={post.data.publishDate}
+                      tags={post.data.tags || []}
+                      slug={post.slug}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Paginación futura */}
+          {maxPosts && posts.length > maxPosts && (
+            <div class="text-center mt-12">
+              <a 
+                href="/blog" 
+                class="btn-primary hover:bg-accent-dark transition-colors duration-200"
+              >
+                Ver Todos los Artículos
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

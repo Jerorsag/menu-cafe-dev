@@ -1,0 +1,22 @@
+---
+// src/pages/blog.astro
+import BlogHero from '../components/blog/BlogHero.astro';
+import PostGrid from '../components/blog/PostGrid.astro';
+import BlogSidebar from '../components/blog/BlogSidebar.astro';
+import Layout from '../layouts/Layout.astro';
+
+// Obtener todos los posts del blog
+import { getCollection } from 'astro:content';
+const allPosts = await getCollection('blog');
+
+// Ordenar por fecha más reciente
+const sortedPosts = allPosts.sort((a, b) => 
+  b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+---
+
+<Layout title='Blog - Mocawa Coffee'>
+  <BlogHero />
+  <PostGrid posts={sortedPosts} />
+  <BlogSidebar posts={sortedPosts} />
+</Layout>
