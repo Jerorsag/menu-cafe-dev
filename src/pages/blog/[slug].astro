@@ -1,0 +1,145 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from '../../layouts/Layout.astro';
+import BlogSidebar from '../../components/blog/BlogSidebar.astro';
+import ShareButtons from "../../components/blog/ShareButtons.astro";
+import { Calendar, Clock, User, ArrowLeft } from '@lucide/astro';
+
+export async function getStaticPaths() {
+    const allPosts = await getCollection('blog');
+    return allPosts.map((post) => ({
+        params: { slug: post.slug },
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { data, slug } = post;
+const { title, description, image, publishDate, tags } = data;
+const { Content } = await render(post);
+
+// Obtener todos los posts para sidebar
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => 
+    b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+
+// Calcular tiempo estimado de lectura
+const { remarkPluginFrontmatter } = await post.render();
+const wordCount = post.body.replace(/<[^>]*>/g, '').split(/\s+/).filter(word => word.length > 0).length;
+const readTime = Math.ceil(wordCount / 200);
+
+export const prerender = true;
+---
+
+<Layout title={`${title} - Blog Mocawa Coffee`}>
+    <!-- Hero del Artículo -->
+    <section class="bg-sage text-white">
+        <div class="container-mocawa py-16 lg:py-24">
+            <!-- Breadcrumb -->
+            <nav class="mb-8">
+                <a 
+                    href="/blog" 
+                    class="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors duration-200"
+                >
+                    <ArrowLeft class="w-4 h-4" />
+                    Volver al Blog
+                </a>
+            </nav>
+
+            <div class="max-w-4xl">
+                <!-- Tags -->
+                {tags && tags.length > 0 && (
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        {tags.slice(0, 3).map((tag) => (
+                            <span class="bg-white/20 text-white px-3 py-1 rounded-lg font-medium backdrop-blur-sm">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                )}
+
+                <!-- Título -->
+                <h1 class="mb-6 leading-tight">
+                    {title}
+                </h1>
+
+                <!-- Descripción -->
+                <p class="text-xl text-white/90 mb-8 leading-relaxed max-w-3xl">
+                    {description}
+                </p>
+
+                <!-- Meta información -->
+                <div class="flex flex-wrap items-center gap-6 text-white/80">
+                    <div class="flex items-center gap-2">
+                        <Calendar class="w-4 h-4" />
+                        <span>
+                            {new Intl.DateTimeFormat('es-CO', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            }).format(publishDate)}
+                        </span>
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <Clock class="w-4 h-4" />
+                        <span>{readTime} min de lectura</span>
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <User class="w-4 h-4" />
+                        <span>Equipo Mocawa</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Imagen Principal -->
+    {image && (
+        <section class="relative -mt-8 mb-16">
+            <div class="container-mocawa">
+                <div class="relative overflow-hidden rounded-2xl shadow-2xl">
+                    <img 
+                        src={image} 
+                        alt={title}
+                        class="w-full h-[300px] md:h-[400px] lg:h-[500px] object-cover"
+                        loading="eager"
+                    />
+                </div>
+            </div>
+        </section>
+    )}
+
+    <!-- Contenido Principal -->
+    <section class="py-8 lg:py-12 bg-layout">
+        <div class="container-mocawa">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-12">
+                <!-- Contenido del Artículo -->
+                <article class="lg:col-span-8">
+
+                    <!-- Botones de Compartir (Mobile - Top) -->
+                    <div class="lg:hidden mb-8">
+                        <ShareButtons title={title} slug={slug} />
+                    </div>
+
+                    <!-- Contenido Markdown -->
+                    <div class="prose prose-lg max-w-none">
+                        <Content />
+                    </div>
+
+                    <!-- Botones de Compartir (Desktop - Bottom) -->
+                    <div class="hidden lg:block mt-12 pt-8 border-t border-card">
+                        <ShareButtons title={title} slug={slug} />
+                    </div>
+                </article>
+
+                <!-- Sidebar -->
+                <aside class="lg:col-span-4 mt-12 lg:mt-0 lg:sticky lg:top-24 lg:self-start">
+                    <BlogSidebar posts={sortedPosts} />
+                </aside>
+            </div>
+        </div>
+    </section>
+</Layout>

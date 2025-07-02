@@ -1,0 +1,99 @@
+---
+import { Share2, Facebook, MessageCircle, Link, Instagram } from '@lucide/astro';
+
+export interface Props {
+  title: string;
+  slug: string;
+}
+
+const { title, slug } = Astro.props;
+
+// URL completa del artículo
+const articleUrl = `https://mocawacafe.com/blog/${slug}`;
+const encodedUrl = encodeURIComponent(articleUrl);
+const encodedTitle = encodeURIComponent(title);
+
+// URLs de compartir
+const shareUrls = {
+  facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+  whatsapp: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`,
+  instagram: `https://www.instagram.com/mocawacafe`
+};
+---
+
+<div class="flex flex-col sm:flex-row gap-4">
+  <div class="flex items-center gap-2 text-layout opacity-70">
+    <Share2 class="w-4 h-4" />
+    <span class="font-medium">Compartir:</span>
+  </div>
+  
+  <div class="flex gap-2">
+    <!-- Facebook -->
+    <a 
+      href={shareUrls.facebook}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-[#1877f2] text-white hover:bg-[#1877f2]/90 transition-colors duration-200"
+      aria-label="Compartir en Facebook"
+    >
+      <Facebook class="w-4 h-4" />
+    </a>
+
+    <!-- Instagram -->
+    <a 
+      href={shareUrls.instagram}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] text-white hover:opacity-90 transition-opacity duration-200"
+      aria-label="Seguir en Instagram"
+    >
+      <Instagram class="w-4 h-4" />
+    </a>
+
+    <!-- WhatsApp -->
+    <a 
+      href={shareUrls.whatsapp}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-green-500 text-white hover:bg-green-600 transition-colors duration-200"
+      aria-label="Compartir en WhatsApp"
+    >
+      <MessageCircle class="w-4 h-4" />
+    </a>
+
+    <!-- Copiar enlace -->
+    <button 
+      id="copy-link-btn"
+      data-url={articleUrl}
+      class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-card border border-card text-layout hover:bg-accent hover:text-white hover:border-accent transition-all duration-200"
+      aria-label="Copiar enlace"
+      title="Copiar enlace"
+    >
+      <Link class="w-4 h-4" />
+    </button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const copyBtn = document.getElementById('copy-link-btn');
+    
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async function() {
+        const url = this.getAttribute('data-url');
+        
+        try {
+          await navigator.clipboard.writeText(url);
+        } catch (err) {
+          // Fallback para navegadores más antiguos
+          const textArea = document.createElement('textarea');
+          textArea.value = url;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+        }
+      });
+    }
+  });
+</script>
