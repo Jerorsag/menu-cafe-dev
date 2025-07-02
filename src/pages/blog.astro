@@ -1,5 +1,4 @@
 ---
-// src/pages/blog.astro
 import BlogHero from '../components/blog/BlogHero.astro';
 import PostGrid from '../components/blog/PostGrid.astro';
 import BlogSidebar from '../components/blog/BlogSidebar.astro';
@@ -17,6 +16,23 @@ const sortedPosts = allPosts.sort((a, b) =>
 
 <Layout title='Blog - Mocawa Coffee'>
   <BlogHero />
-  <PostGrid posts={sortedPosts} />
-  <BlogSidebar posts={sortedPosts} />
+  
+  <!-- Contenedor principal para PostGrid y BlogSidebar -->
+  <section class="py-16 lg:py-20 bg-background">
+    <div class="container-mocawa">
+      <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+        <!-- PostGrid - Ocupa 8 columnas en desktop -->
+        <div class="lg:col-span-8">
+          <PostGrid posts={sortedPosts} showTitle={true} />
+        </div>
+        
+        <!-- BlogSidebar - Ocupa 4 columnas en desktop -->
+        <div class="lg:col-span-4 mt-8 lg:mt-0">
+          <BlogSidebar posts={sortedPosts} />
+        </div>
+      </div>
+      
+
+    </div>
+  </section>
 </Layout>

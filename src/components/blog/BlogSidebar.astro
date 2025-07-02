@@ -1,5 +1,4 @@
 ---
-// src/components/blog/BlogSidebar.astro
 import "../../styles/global.css"
 import { Calendar, TrendingUp, Tag, Users, Coffee, Leaf, Briefcase, Heart, Home, Clock } from '@lucide/astro';
 
@@ -54,203 +53,194 @@ const getCategoryIcon = (tag: string) => {
 };
 ---
 
-<section class="py-16 lg:py-20 bg-background">
-  <div class="container-mocawa">
-    <div class="lg:grid lg:grid-cols-12 lg:gap-8">
-      <!-- Sidebar -->
-      <div class="lg:col-span-4 mt-12 lg:mt-0">
-        <div class="space-y-8">
-          
-          <!-- Calendario Editorial -->
-          <div class="bg-card rounded-2xl border border-card p-6">
-            <div class="flex items-center gap-2 mb-6">
-              <Calendar class="text-accent w-5 h-5" />
-              <h3 class="text-lg font-semibold text-layout">Calendario Editorial</h3>
-            </div>
-            
-            <div class="space-y-4">
-              {editorialCalendar.map(item => {
-                const IconComponent = item.icon;
-                return (
-                  <div class="flex items-start gap-3 p-3 bg-background rounded-lg border border-card">
-                    <IconComponent class={`w-5 h-5 mt-0.5 ${item.color}`} />
-                    <div class="flex-1 min-w-0">
-                      <div class="flex items-center gap-2 mb-1">
-                        <span class="font-medium text-layout text-sm">{item.day}</span>
-                        <span class={`text-xs px-2 py-1 rounded-full ${item.color} bg-opacity-10`}>
-                          {item.type}
-                        </span>
-                      </div>
-                      <p class="text-layout opacity-70 text-sm leading-relaxed">
-                        {item.example}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-            
-            <div class="mt-4 pt-4 border-t border-card">
-              <p class="text-layout opacity-60 text-xs text-center flex items-center justify-center gap-1">
-                <Clock class="w-3 h-3" />
-                Contenido nuevo cada semana
+<!-- Eliminamos el contenedor de sección ya que será manejado por el componente padre -->
+<div class="space-y-8 sticky top-8">
+  
+  <!-- Calendario Editorial -->
+  <div class="bg-card rounded-2xl border border-card p-6">
+    <div class="flex items-center gap-2 mb-6">
+      <Calendar class="text-accent w-5 h-5" />
+      <h3 class="text-lg font-semibold text-layout">Calendario Editorial</h3>
+    </div>
+    
+    <div class="space-y-4">
+      {editorialCalendar.map(item => {
+        const IconComponent = item.icon;
+        return (
+          <div class="flex items-start gap-3 p-3 bg-background rounded-lg border border-card">
+            <IconComponent class={`w-5 h-5 mt-0.5 ${item.color}`} />
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="font-medium text-layout text-sm">{item.day}</span>
+                <span class={`text-xs px-2 py-1 rounded-full ${item.color} bg-opacity-10`}>
+                  {item.type}
+                </span>
+              </div>
+              <p class="text-layout opacity-70 text-sm leading-relaxed">
+                {item.example}
               </p>
             </div>
           </div>
+        );
+      })}
+    </div>
+    
+    <div class="mt-4 pt-4 border-t border-card">
+      <p class="text-layout opacity-60 text-xs text-center flex items-center justify-center gap-1">
+        <Clock class="w-3 h-3" />
+        Contenido nuevo cada semana
+      </p>
+    </div>
+  </div>
 
-          <!-- Posts Recientes -->
-          <div class="bg-card rounded-2xl border border-card p-6">
-            <div class="flex items-center gap-2 mb-6">
-              <TrendingUp class="text-accent w-5 h-5" />
-              <h3 class="text-lg font-semibold text-layout">Artículos Recientes</h3>
+  <!-- Posts Recientes -->
+  <div class="bg-card rounded-2xl border border-card p-6">
+    <div class="flex items-center gap-2 mb-6">
+      <TrendingUp class="text-accent w-5 h-5" />
+      <h3 class="text-lg font-semibold text-layout">Artículos Recientes</h3>
+    </div>
+    
+    <div class="space-y-4">
+      {recentPosts.map(post => (
+        <article class="group">
+          <a href={`/blog/${post.slug}`} class="block">
+            <div class="flex gap-3">
+              <img 
+                src={post.data.image} 
+                alt={post.data.title}
+                class="w-16 h-16 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200"
+                loading="lazy"
+              />
+              <div class="flex-1 min-w-0">
+                <h4 class="font-medium text-layout group-hover:text-accent transition-colors duration-200 line-clamp-2 text-sm mb-1">
+                  {post.data.title}
+                </h4>
+                <p class="text-layout opacity-60 text-xs">
+                  {new Intl.DateTimeFormat('es-CO', {
+                    month: 'short',
+                    day: 'numeric'
+                  }).format(post.data.publishDate)}
+                </p>
+              </div>
             </div>
-            
-            <div class="space-y-4">
-              {recentPosts.map(post => (
-                <article class="group">
-                  <a href={`/blog/${post.slug}`} class="block">
-                    <div class="flex gap-3">
-                      <img 
-                        src={post.data.image} 
-                        alt={post.data.title}
-                        class="w-16 h-16 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200"
-                        loading="lazy"
-                      />
-                      <div class="flex-1 min-w-0">
-                        <h4 class="font-medium text-layout group-hover:text-accent transition-colors duration-200 line-clamp-2 text-sm mb-1">
-                          {post.data.title}
-                        </h4>
-                        <p class="text-layout opacity-60 text-xs">
-                          {new Intl.DateTimeFormat('es-CO', {
-                            month: 'short',
-                            day: 'numeric'
-                          }).format(post.data.publishDate)}
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </article>
-              ))}
-            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <!-- Tags Populares -->
+  <div class="bg-card rounded-2xl border border-card p-6">
+    <div class="flex items-center gap-2 mb-6">
+      <Tag class="text-accent w-5 h-5" />
+      <h3 class="text-lg font-semibold text-layout">Temas Populares</h3>
+    </div>
+    
+    <div class="flex flex-wrap gap-2">
+      {popularTags.map(({ tag, count }) => {
+        const categoryStyle = getCategoryIcon(tag);
+        const IconComponent = categoryStyle.icon;
+        return (
+          <div 
+            class="inline-flex items-center gap-1 px-3 py-2 rounded-lg border border-card text-sm transition-all duration-200"
+          >
+            <IconComponent class={`w-3 h-3 ${categoryStyle.color}`} />
+            <span>{tag}</span>
+            <span class="text-xs opacity-60 group-hover:opacity-80">({count})</span>
           </div>
+        );
+      })}
+    </div>
+  </div>
 
-          <!-- Tags Populares -->
-          <div class="bg-card rounded-2xl border border-card p-6">
-            <div class="flex items-center gap-2 mb-6">
-              <Tag class="text-accent w-5 h-5" />
-              <h3 class="text-lg font-semibold text-layout">Temas Populares</h3>
-            </div>
-            
-            <div class="flex flex-wrap gap-2">
-              {popularTags.map(({ tag, count }) => {
-                const categoryStyle = getCategoryIcon(tag);
-                const IconComponent = categoryStyle.icon;
-                return (
-                  <a 
-                    href={`/blog/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`}
-                    class="inline-flex items-center gap-1 bg-background hover:bg-accent hover:text-white px-3 py-2 rounded-lg border border-card text-sm transition-all duration-200 group"
-                  >
-                    <IconComponent class={`w-3 h-3 ${categoryStyle.color} group-hover:text-white`} />
-                    <span>{tag}</span>
-                    <span class="text-xs opacity-60 group-hover:opacity-80">({count})</span>
-                  </a>
-                );
-              })}
-            </div>
+  <!-- Estadísticas de Categorías -->
+  <div class="bg-card rounded-2xl border border-card p-6">
+    <div class="flex items-center gap-2 mb-6">
+      <Users class="text-accent w-5 h-5" />
+      <h3 class="text-lg font-semibold text-layout">Distribución de Contenido</h3>
+    </div>
+    
+    <div class="space-y-3">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <Leaf class="w-4 h-4 text-green-500" />
+          <span class="text-sm text-layout">Cultura Cafetera</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-12 h-2 bg-background rounded-full overflow-hidden">
+            <div class="w-[30%] h-full bg-green-500 rounded-full"></div>
           </div>
-
-          <!-- Estadísticas de Categorías -->
-          <div class="bg-card rounded-2xl border border-card p-6">
-            <div class="flex items-center gap-2 mb-6">
-              <Users class="text-accent w-5 h-5" />
-              <h3 class="text-lg font-semibold text-layout">Distribución de Contenido</h3>
-            </div>
-            
-            <div class="space-y-3">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <Leaf class="w-4 h-4 text-green-500" />
-                  <span class="text-sm text-layout">Cultura Cafetera</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <div class="w-12 h-2 bg-background rounded-full overflow-hidden">
-                    <div class="w-[30%] h-full bg-green-500 rounded-full"></div>
-                  </div>
-                  <span class="text-xs text-layout opacity-60">30%</span>
-                </div>
-              </div>
-              
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <Briefcase class="w-4 h-4 text-blue-500" />
-                  <span class="text-sm text-layout">Vida Profesional</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <div class="w-12 h-2 bg-background rounded-full overflow-hidden">
-                    <div class="w-[25%] h-full bg-blue-500 rounded-full"></div>
-                  </div>
-                  <span class="text-xs text-layout opacity-60">25%</span>
-                </div>
-              </div>
-              
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <Heart class="w-4 h-4 text-pink-500" />
-                  <span class="text-sm text-layout">Bienestar & Salud</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <div class="w-12 h-2 bg-background rounded-full overflow-hidden">
-                    <div class="w-[25%] h-full bg-pink-500 rounded-full"></div>
-                  </div>
-                  <span class="text-xs text-layout opacity-60">25%</span>
-                </div>
-              </div>
-              
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <Home class="w-4 h-4 text-orange-500" />
-                  <span class="text-sm text-layout">Comunidad Mocawa</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <div class="w-12 h-2 bg-background rounded-full overflow-hidden">
-                    <div class="w-[20%] h-full bg-orange-500 rounded-full"></div>
-                  </div>
-                  <span class="text-xs text-layout opacity-60">20%</span>
-                </div>
-              </div>
-            </div>
+          <span class="text-xs text-layout opacity-60">30%</span>
+        </div>
+      </div>
+      
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <Briefcase class="w-4 h-4 text-blue-500" />
+          <span class="text-sm text-layout">Vida Profesional</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-12 h-2 bg-background rounded-full overflow-hidden">
+            <div class="w-[25%] h-full bg-blue-500 rounded-full"></div>
           </div>
-
-          <!-- Newsletter / CTA -->
-          <div class="bg-gradient-to-br from-[var(--sage)] to-[var(--sage-dark)] rounded-2xl p-6 text-white">
-            <div class="text-center">
-              <Coffee class="w-8 h-8 mx-auto mb-4 opacity-90" />
-              <h3 class="text-lg font-semibold mb-2">¿Te gusta nuestro contenido?</h3>
-              <p class="text-white/90 text-sm mb-4 leading-relaxed">
-                Síguenos en redes sociales para no perderte ningún artículo y conocer las últimas novedades de Mocawa.
-              </p>
-              <div class="flex gap-2 justify-center">
-                <a 
-                  href="#" 
-                  class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
-                >
-                  Instagram
-                </a>
-                <a 
-                  href="#" 
-                  class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
-                >
-                  Facebook
-                </a>
-              </div>
-            </div>
+          <span class="text-xs text-layout opacity-60">25%</span>
+        </div>
+      </div>
+      
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <Heart class="w-4 h-4 text-pink-500" />
+          <span class="text-sm text-layout">Bienestar & Salud</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-12 h-2 bg-background rounded-full overflow-hidden">
+            <div class="w-[25%] h-full bg-pink-500 rounded-full"></div>
           </div>
-
+          <span class="text-xs text-layout opacity-60">25%</span>
+        </div>
+      </div>
+      
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <Home class="w-4 h-4 text-orange-500" />
+          <span class="text-sm text-layout">Comunidad Mocawa</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-12 h-2 bg-background rounded-full overflow-hidden">
+            <div class="w-[20%] h-full bg-orange-500 rounded-full"></div>
+          </div>
+          <span class="text-xs text-layout opacity-60">20%</span>
         </div>
       </div>
     </div>
   </div>
-</section>
+
+  <!-- Newsletter / CTA -->
+  <div class="bg-gradient-to-br from-[var(--sage)] to-[var(--sage-dark)] rounded-2xl p-6 text-white">
+    <div class="text-center">
+      <Coffee class="w-8 h-8 mx-auto mb-4 opacity-90" />
+      <h3 class="text-lg font-semibold mb-2">¿Te gusta nuestro contenido?</h3>
+      <p class="text-white/90 text-sm mb-4 leading-relaxed">
+        Síguenos en redes sociales para no perderte ningún artículo y conocer las últimas novedades de Mocawa.
+      </p>
+      <div class="flex gap-2 justify-center">
+        <a 
+          href="https://instagram.com/mocawacafe" target="_blank"
+          class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+        >
+          Instagram
+        </a>
+        <a 
+          href="https://facebook.com/mocawacafe" target="_blank"
+          class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+        >
+          Facebook
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 <style>
   .line-clamp-2 {
