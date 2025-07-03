@@ -55,42 +55,62 @@ import { Menu, ShoppingCart, MapPin } from '@lucide/astro';
 </header>
 
 <script>
-  // Toggle menú móvil
-  document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
-    const menu = document.getElementById('mobile-menu');
-    menu?.classList.toggle('hidden');
-  });
-  
-  // Cerrar menú al hacer clic en enlace
-  document.querySelectorAll('#mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.getElementById('mobile-menu')?.classList.add('hidden');
+  // Función para inicializar el menú móvil
+  function initMobileMenu() {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (!mobileMenuBtn || !mobileMenu) return;
+    
+    // Toggle menú móvil
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
     });
-  });
+    
+    // Cerrar menú al hacer clic en enlace
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+    
+    // Cerrar menú al redimensionar
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) {
+        mobileMenu.classList.add('hidden');
+      }
+    });
+  }
   
-  // Actualizar contador carrito
+  // Función para actualizar contador carrito
   function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem('mocawa-cart') || '[]');
     const count = cart.reduce((total, item) => total + item.quantity, 0);
     const countEl = document.getElementById('cart-count');
     
-    if (count > 0) {
-      countEl.textContent = count.toString();
-      countEl.classList.remove('hidden');
-    } else {
-      countEl.classList.add('hidden');
+    if (countEl) {
+      if (count > 0) {
+        countEl.textContent = count.toString();
+        countEl.classList.remove('hidden');
+      } else {
+        countEl.classList.add('hidden');
+      }
     }
   }
   
-  // Inicializar
-  updateCartCount();
-  window.addEventListener('storage', updateCartCount);
-  window.addEventListener('cart-updated', updateCartCount);
+  // Inicializar en carga inicial
+  document.addEventListener('DOMContentLoaded', () => {
+    initMobileMenu();
+    updateCartCount();
+    
+    // Event listeners para el carrito
+    window.addEventListener('storage', updateCartCount);
+    window.addEventListener('cart-updated', updateCartCount);
+  });
   
-  // Cerrar menú al redimensionar
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 768) {
-      document.getElementById('mobile-menu')?.classList.add('hidden');
-    }
+  // Re-inicializar en navegación de Astro
+  document.addEventListener('astro:page-load', () => {
+    initMobileMenu();
+    updateCartCount();
   });
 </script>
