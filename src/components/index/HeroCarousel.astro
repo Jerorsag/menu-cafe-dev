@@ -85,6 +85,11 @@ function initMocawaCarousel() {
   
   if (!track) return;
   
+  // Limpiar autoplay anterior si existe
+  if (window.carouselAutoplayInterval) {
+    clearInterval(window.carouselAutoplayInterval);
+  }
+  
   let currentIndex = 0;
   let autoplayInterval;
   let isSliding = false;
@@ -187,10 +192,15 @@ function initMocawaCarousel() {
   // Autoplay
   function startAutoplay() {
     autoplayInterval = setInterval(nextSlide, 4000);
+    // Guardar referencia global para limpieza
+    window.carouselAutoplayInterval = autoplayInterval;
   }
   
   function stopAutoplay() {
     clearInterval(autoplayInterval);
+    if (window.carouselAutoplayInterval) {
+      clearInterval(window.carouselAutoplayInterval);
+    }
   }
   
   function restartAutoplay() {
@@ -198,25 +208,43 @@ function initMocawaCarousel() {
     startAutoplay();
   }
   
+  // Limpiar event listeners anteriores
+  function cleanupListeners() {
+    const clonedPrevBtn = prevBtn?.cloneNode(true);
+    const clonedNextBtn = nextBtn?.cloneNode(true);
+    const clonedTrack = track?.cloneNode(true);
+    
+    if (clonedPrevBtn) {
+      prevBtn.parentNode.replaceChild(clonedPrevBtn, prevBtn);
+    }
+    if (clonedNextBtn) {
+      nextBtn.parentNode.replaceChild(clonedNextBtn, nextBtn);
+    }
+  }
+  
   // Event listeners
-  prevBtn?.addEventListener('click', () => {
+  const newPrevBtn = document.getElementById('prev-btn');
+  const newNextBtn = document.getElementById('next-btn');
+  const newTrack = document.getElementById('carousel-track');
+  
+  newPrevBtn?.addEventListener('click', () => {
     prevSlide();
     restartAutoplay();
   });
   
-  nextBtn?.addEventListener('click', () => {
+  newNextBtn?.addEventListener('click', () => {
     nextSlide();
     restartAutoplay();
   });
   
   // Touch support
   let startX = 0;
-  track?.addEventListener('touchstart', (e) => {
+  newTrack?.addEventListener('touchstart', (e) => {
     startX = e.touches[0].clientX;
     stopAutoplay();
   });
   
-  track?.addEventListener('touchend', (e) => {
+  newTrack?.addEventListener('touchend', (e) => {
     const endX = e.changedTouches[0].clientX;
     const diff = startX - endX;
     
@@ -227,15 +255,23 @@ function initMocawaCarousel() {
   });
   
   // Pause/resume en hover
-  track?.addEventListener('mouseenter', stopAutoplay);
-  track?.addEventListener('mouseleave', startAutoplay);
+  newTrack?.addEventListener('mouseenter', stopAutoplay);
+  newTrack?.addEventListener('mouseleave', startAutoplay);
   
   // Responsive
-  window.addEventListener('resize', () => {
+  const resizeHandler = () => {
     setupItemWidths();
     createIndicators();
     showSlide(Math.min(currentIndex, getMaxIndex()));
-  });
+  };
+  
+  // Remover listener anterior si existe
+  if (window.carouselResizeHandler) {
+    window.removeEventListener('resize', window.carouselResizeHandler);
+  }
+  
+  window.addEventListener('resize', resizeHandler);
+  window.carouselResizeHandler = resizeHandler;
   
   // Inicializar
   setupItemWidths();
@@ -244,8 +280,11 @@ function initMocawaCarousel() {
   startAutoplay();
 }
 
-// Inicializar cuando DOM esté listo
+// Inicializar en carga inicial
 document.addEventListener('DOMContentLoaded', initMocawaCarousel);
+
+// Re-inicializar en navegación de Astro
+document.addEventListener('astro:page-load', initMocawaCarousel);
 </script>
 
 <style>
