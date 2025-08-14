@@ -33,7 +33,7 @@ import { Menu, ShoppingCart, MapPin } from '@lucide/astro';
         </button>
         
         <!-- Menú móvil -->
-        <button id="mobile-menu-btn" class="md:hidden text-header hover:text-accent transition-colors">
+        <button id="mobile-menu-btn" class="md:hidden text-header hover:text-accent transition-colors cursor-pointer">
           <Menu size={24} />
         </button>
       </div>
@@ -45,10 +45,6 @@ import { Menu, ShoppingCart, MapPin } from '@lucide/astro';
         <a href="/menu" class="text-header hover:text-accent py-2 font-medium transition-colors">Menú</a>
         <a href="/nosotros" class="text-header hover:text-accent py-2 font-medium transition-colors">Nosotros</a>
         <a href="/blog" class="text-header hover:text-accent py-2 font-medium transition-colors">Blog</a>
-        <a href="#ubicacion" class="text-header hover:text-accent py-2 text-sm font-medium transition-colors flex items-center">
-          <MapPin size={16} class="mr-2" />
-          CC Mocawa Plaza
-        </a>
       </div>
     </div>
   </div>
@@ -62,8 +58,13 @@ import { Menu, ShoppingCart, MapPin } from '@lucide/astro';
     
     if (!mobileMenuBtn || !mobileMenu) return;
     
+    // Limpiar event listeners previos
+    const newBtn = mobileMenuBtn.cloneNode(true);
+    mobileMenuBtn.parentNode.replaceChild(newBtn, mobileMenuBtn);
+    
     // Toggle menú móvil
-    mobileMenuBtn.addEventListener('click', () => {
+    document.getElementById('mobile-menu-btn').addEventListener('click', function(e) {
+      e.preventDefault();
       mobileMenu.classList.toggle('hidden');
     });
     
@@ -74,6 +75,14 @@ import { Menu, ShoppingCart, MapPin } from '@lucide/astro';
       });
     });
     
+    // Cerrar menú al hacer clic fuera
+    document.addEventListener('click', function(e) {
+      const btn = document.getElementById('mobile-menu-btn');
+      if (btn && !mobileMenu.contains(e.target) && !btn.contains(e.target)) {
+        mobileMenu.classList.add('hidden');
+      }
+    });
+    
     // Cerrar menú al redimensionar
     window.addEventListener('resize', () => {
       if (window.innerWidth >= 768) {
@@ -81,22 +90,12 @@ import { Menu, ShoppingCart, MapPin } from '@lucide/astro';
       }
     });
   }
-  
-  // Función para actualizar contador carrito
-  function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem('mocawa-cart') || '[]');
-    const count = cart.reduce((total, item) => total + item.quantity, 0);
-    const countEl = document.getElementById('cart-count');
-    
-    if (countEl) {
-      if (count > 0) {
-        countEl.textContent = count.toString();
-        countEl.classList.remove('hidden');
-      } else {
-        countEl.classList.add('hidden');
-      }
-    }
-  }
+
+  // Inicializar
+  document.addEventListener('DOMContentLoaded', initMobileMenu);
+
+  // Para Astro (navegación SPA)
+  document.addEventListener('astro:page-load', initMobileMenu);
   
   // Inicializar en carga inicial
   document.addEventListener('DOMContentLoaded', () => {
