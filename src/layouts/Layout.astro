@@ -19,13 +19,40 @@ const fullTitle = title === "Inicio" ? "Mocawa Café - Tu pausa perfecta" : `${t
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{fullTitle}</title>
-	<ClientRouter/>
-    <meta name="description" content={description} />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  </head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Título dinámico -->
+  <title>{fullTitle}</title>
+
+  <!-- Descripción SEO -->
+  <meta name="description" content="Mocawa Café es una marca inspirada en la tradición cafetera del Quindío. Ofrecemos experiencias únicas alrededor del café, desde granos seleccionados hasta preparaciones especiales, resaltando la cultura, el sabor y la calidad de nuestra tierra." />
+   
+  <!-- Accesibilidad y SEO adicional -->
+  <meta name="author" content="Mocawa Café" />
+  <meta name="keywords" content="Mocawa Café, café de Colombia, café especial, cafetería Armenia Quindío, café gourmet, café Quindío, cultura cafetera, tradición cafetera" />
+
+
+  <!-- Open Graph para redes sociales -->
+  <meta property="og:title" content="Mocawa Café | Tradición y Experiencia Cafetera" />
+  <meta property="og:description" content="Mocawa Café es una marca inspirada en la tradición cafetera del Quindío. Ofrecemos experiencias únicas alrededor del café, resaltando la cultura, el sabor y la calidad de nuestra tierra." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://menu-cafe-dev.vercel.app" />
+  <meta property="og:image" content="https://menu-cafe-dev.vercel.app/img/og-image.png" />
+  <meta property="og:site_name" content="Mocawa Café" />
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Mocawa Café | Tradición y Experiencia Cafetera" />
+  <meta name="twitter:description" content="Mocawa Café es una marca inspirada en la tradición cafetera del Quindío. Ofrecemos experiencias únicas alrededor del café, resaltando la cultura, el sabor y la calidad de nuestra tierra." />
+  <meta name="twitter:image" content="https://menu-cafe-dev.vercel.app/img/logo-mocawa.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/img/logo-mocawa.png" />
+
+  <!-- Scripts del cliente (si usas React/Svelte/Astro) -->
+  <ClientRouter />
+</head>
   
   <body class={`${Astro.url.pathname === '/menu' ? 'menu-theme' : ''}`}>
     <Header />
