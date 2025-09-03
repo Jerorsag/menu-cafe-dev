@@ -1,0 +1,38 @@
+---
+import type { Product } from '../../lib/types';
+import ProductCard from './ProductCard.astro';
+
+interface Props { products: Product[] }
+const { products = [] }: Props = Astro.props;
+---
+<section>
+  {products.length === 0 ? (
+    <div class="text-neutral-600">No hay productos publicados.</div>
+  ) : (
+    <div id="grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {products.map((p) => (
+        <div class="card" data-cat={p.catSlug}>
+          <ProductCard product={p} />
+        </div>
+      ))}
+    </div>
+  )}
+</section>
+
+<script is:inline>
+  (function(){
+    // Filtro por categoría vía estado global existente
+    const grid = document.getElementById('grid');
+    if (!grid) return;
+    const cards = Array.from(grid.querySelectorAll('.card'));
+
+    function apply() {
+      const state = window.menuState || { activeCategory: 'panaderia' };
+      const cat = state.activeCategory;
+      cards.forEach(card => card.classList.toggle('hidden', card.dataset.cat !== cat));
+    }
+
+    apply();
+    window.addEventListener('menu-state-changed', apply);
+  })();
+</script>
