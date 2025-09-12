@@ -13,6 +13,10 @@ const catLabel =
   (product.catSlug || '')
     .replace(/-/g, ' ')
     .replace(/\b\w/g, (m) => m.toUpperCase()) || 'General';
+
+const phone = import.meta.env.PUBLIC_WHATSAPP_PHONE as string | undefined; // ej: 573001112233 (sin +)
+const msg = `Hola, quiero pedir este producto ahora:\n• ${product.title} — ${price}\nGracias.`;
+const waHref = phone ? `https://wa.me/${phone}?text=${encodeURIComponent(msg)}` : '#';
 ---
 
 <article
@@ -61,16 +65,14 @@ const catLabel =
     {/* Precio + CTA visual (neutral, con acento sutil al hover) */}
     <div class="mt-4 flex items-center justify-between">
       <p class="text-xl font-semibold text-[var(--sage-darker)]">{price}</p>
-
       <a
-        href="#"
-        role="button"
-        aria-disabled="true"
-        title="Pedido próximamente"
-        class="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium
-               bg-[var(--sage-darker)] border border-card text-header
+        href={waHref}
+        target="_blank"
+        rel="noopener"
+        class={`inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium
+                bg-[var(--sage-darker)] border border-card text-header
                hover:border-[var(--accent-color)]/60 hover:text-[var(--sage-dark)]
-               transition-colors duration-300 cursor-pointer"
+               transition-colors duration-300 cursor-pointer ${phone ? '' : 'opacity-60 cursor-not-allowed pointer-events-none'}`}
       >
         Pedir
       </a>

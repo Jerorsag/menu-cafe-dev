@@ -3,43 +3,20 @@ import "../../styles/global.css"
 import { Star, Heart } from '@lucide/astro';
 
 const favoritosDelMes = [
-  {
-    id: 1,
-    nombre: "Torta Artesanal",
-    descripcion: "El combo perfecto",
-    precio: "$8.500",
-    imagen: "/img/products/torta.png",
-    alt: "Café americano con croissant fresco",
-    popular: true
-  },
-  {
-    id: 2,
-    nombre: "Latte",
-    descripcion: "Cada taza es única",
-    precio: "$7.200",
-    imagen: "/img/products/cafe.png",
-    alt: "Latte con arte en espuma de leche",
-    popular: false
-  },
-  {
-    id: 3,
-    nombre: "Sándwich Saludable",
-    descripcion: "Para después del gym",
-    precio: "$9.800",
-    imagen: "/img/products/sandwich.png",
-    alt: "Sándwich saludable con vegetales frescos",
-    popular: false
-  },
-  {
-    id: 4,
-    nombre: "Granizado de Cafe",
-    descripcion: "Nuestro mejor secreto",
-    precio: "$6.800",
-    imagen: "/img/products/granizado.png",
-    alt: "Cappuccino especial de la casa",
-    popular: true
-  }
+  { id: 1, nombre: "Torta Artesanal", descripcion: "El combo perfecto", precio: "$8.500", imagen: "/img/products/torta.png", alt: "Café americano con croissant fresco", popular: true },
+  { id: 2, nombre: "Latte", descripcion: "Cada taza es única", precio: "$7.200", imagen: "/img/products/cafe.png", alt: "Latte con arte en espuma de leche", popular: false },
+  { id: 3, nombre: "Sándwich Saludable", descripcion: "Para después del gym", precio: "$9.800", imagen: "/img/products/sandwich.png", alt: "Sándwich saludable con vegetales frescos", popular: false },
+  { id: 4, nombre: "Granizado de Cafe", descripcion: "Nuestro mejor secreto", precio: "$6.800", imagen: "/img/products/granizado.png", alt: "Cappuccino especial de la casa", popular: true }
 ];
+
+// Número de WhatsApp desde .env (ej: 573001112233)
+const phone = import.meta.env.PUBLIC_WHATSAPP_PHONE as string | undefined;
+
+// Helper para armar el enlace de WhatsApp con mensaje
+function waHrefFor(p: { nombre: string; precio: string }) {
+  const msg = `Hola, quiero pedir este producto ahora:\n• ${p.nombre} — ${p.precio}\nGracias.`;
+  return phone ? `https://wa.me/${phone}?text=${encodeURIComponent(msg)}` : '#';
+}
 ---
 
 <section class="relative w-full bg-white py-16 lg:py-20">
@@ -100,9 +77,16 @@ const favoritosDelMes = [
               <p class="text-xl font-bold text-[var(--sage-darker)]">
                 {producto.precio}
               </p>
-              <button class="bg-[var(--sage)] hover:bg-[var(--sage-dark)] text-white px-4 py-2 rounded-xl font-medium transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 ease-in cursor-pointer">
+              <a
+                href={waHrefFor(producto)}
+                target="_blank"
+                rel="noopener"
+                class={`px-4 py-2 rounded-xl font-medium transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 ease-in
+                        ${phone ? 'bg-[var(--sage)] hover:bg-[var(--sage-dark)] text-white cursor-pointer' : 'bg-gray-200 text-gray-500 cursor-not-allowed pointer-events-none'}`}
+                title={phone ? 'Pedir por WhatsApp' : 'Configura PUBLIC_WHATSAPP_PHONE'}
+              >
                 Ordenar
-              </button>
+              </a>
             </div>
           </div>
 
